@@ -27,23 +27,74 @@
     .gallery img:hover {
       transform: scale(1.05);
     }
+    
+    /* Responsive additions */
+    @media (max-width: 768px) {
+      .flex {
+        flex-direction: column;
+      }
+      .w-59 {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      .h-screen {
+        height: auto;
+      }
+      .sticky {
+        position: relative;
+      }
+      .slider-text {
+        height: auto !important;
+      }
+      .slider-text-inner {
+        flex-direction: column !important;
+        height: auto !important;
+      }
+      .desc, .gif-section {
+        width: 100% !important;
+      }
+      .flex-gap-4 {
+        flex-direction: column;
+      }
+      .flex-gap-4 img {
+        width: 100% !important;
+        height: auto !important;
+      }
+      .container > div {
+        flex-direction: column !important;
+      }
+      #publications .container > div {
+        flex-direction: column !important;
+      }
+      #publications p {
+        padding: 0 1rem;
+      }
+    }
+    
+    @media (min-width: 769px) {
+      .flex-gap-4 {
+        display: flex;
+        gap: 1rem;
+      }
+    }
   </style>
   
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<body class="bg-gray-100 font-sans"   >
+<body class="bg-gray-100 font-sans">
 
 
   <div class="flex">
     <!-- Sidebar -->
     <div class="w-59 h-screen sticky top-0 bg-white shadow-lg p-6" style="background-image: url('gara/MAIN.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center;">
-        <img src="gara/port.jpg" alt="Profile Photo" class="w-32 h-32 rounded-full object-cover" />
-      <h1 class="text-1xl font-bold mb-4">Shimiyana Jakroda</h1>
+        <img src="gara/port.jpg" alt="Profile Photo" class="w-32 h-32 rounded-full object-cover mx-auto md:mx-0" />
+      <h1 class="text-1xl font-bold mb-4 text-center md:text-left">Shimiyana Jakroda</h1>
       <ul class="space-y-4">
-        <li><button onclick="scrollToSection('home')" id="btn-home" class="sidebar-link text-blue-600 hover:underline">Home</button></li>
-        <li><button onclick="scrollToSection('publications')" id="btn-publications" class="sidebar-link text-blue-600 hover:underline">Publications</button></li>
-        <li><button onclick="scrollToSection('gallery')" id="btn-gallery" class="sidebar-link text-blue-600 hover:underline">Gallery</button></li>
-        <li><button onclick="scrollToSection('cv')" id="btn-cv" class="sidebar-link text-blue-600 hover:underline">CV</button></li>
+        <li><button onclick="scrollToSection('home')" id="btn-home" class="sidebar-link text-blue-600 hover:underline w-full text-center md:text-left">Home</button></li>
+        <li><button onclick="scrollToSection('publications')" id="btn-publications" class="sidebar-link text-blue-600 hover:underline w-full text-center md:text-left">Publications</button></li>
+        <li><button onclick="scrollToSection('gallery')" id="btn-gallery" class="sidebar-link text-blue-600 hover:underline w-full text-center md:text-left">Gallery</button></li>
+        <li><button onclick="scrollToSection('cv')" id="btn-cv" class="sidebar-link text-blue-600 hover:underline w-full text-center md:text-left">CV</button></li>
       </ul>
       <div class="mt-8 flex justify-center space-x-4">
         <a href="https://github.com/ShimiyanaJakroda" target="_blank" style="color: #0A66C2; font-size: 24px;">
@@ -60,7 +111,7 @@
 
     <!-- Scrollable Content -->
     <div class="flex-1 overflow-y-auto h-screen scroll-smooth" id="scrollContainer">
-      <section id="home" class="min-h-screen p-8 bg-gray-50">
+      <section id="home" class="min-h-screen p-4 md:p-8 bg-gray-50">
         <div class="slider-text animated fadeInUp" style="height: 607px;"  >
             <div class="slider-text-inner" style="display: flex; align-items: center; gap: 40px; height: 607px;"   >
               
@@ -118,7 +169,7 @@
     </section>
 
       <!-- Publications Section -->
-      <section id="publications" class="min-h-screen p-8 bg-white">
+      <section id="publications" class="min-h-screen p-4 md:p-8 bg-white">
         <h2 class="text-2xl font-bold mb-2 text-gray-800" align="center"><em>Publication</em></h2>
           <!-- Book publication -->
            <br>
@@ -165,7 +216,7 @@
                 <em><b><u>Speakers included</u></b>:</em><br>
                 <b>Dr. Nicolas Maple</b> – Lecturer in Migration Studies, Universityof London.<br>
                 <br>
-                <b>Mainga Simoonga</b> – International Law Master’s Student,<br>
+                <b>Mainga Simoonga</b> – International Law Master's Student,<br>
                 University of Glasgow; African Excellence Scholar; Lawyer and Author.<br>
                 <br>
                 <b>Marie Françoise</b> – Pharmacist; President of the Zambia Union of Pharmacy <br>
@@ -212,46 +263,46 @@
 
    
       <!-- Gallery Section -->
-<section id="gallery" class="min-h-screen p-8 bg-gray-50"  >
+<section id="gallery" class="min-h-screen p-4 md:p-8 bg-gray-50"  >
     <h2 class="text-2xl font-bold mb-2 text-gray-800" align="center"><em>Gallery</em></h2>
 
-    <div class="flex gap-4"> <!-- Adjust gap (spacing) as needed -->
+    <div class="flex-gap-4"> <!-- Adjust gap (spacing) as needed -->
       <img 
           src="gara/me.png" 
           alt="Project 1"  
-          class="w-[700px] h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
+          class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
       
       <img 
           src="gara/Brainv.jpg" 
           alt="Project 2"  
-          class="w-[700px] h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
+          class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
   </div>
 
 <br>
-  <div class="flex gap-4"> <!-- Adjust gap (spacing) as needed -->
+  <div class="flex-gap-4"> <!-- Adjust gap (spacing) as needed -->
     <img 
         src="gara/frame.jpg" 
         alt="Project 1"  
-        class="w-[400px] h-[500px] object-cover rounded-lg ">
+        class="w-full md:w-[400px] h-auto md:h-[500px] object-cover rounded-lg ">
         
     
     <img 
         src="gara/ALRO.png" 
         alt="Project 2"  
-        class="w-[700px] h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
+        class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
 </div>
 <br>
-<div class="flex gap-4"> <!-- Adjust gap (spacing) as needed -->
+<div class="flex-gap-4"> <!-- Adjust gap (spacing) as needed -->
   <img 
       src="gara/german.png" 
       alt="Project 1"  
-      class="w-[700px] h-[500px] object-cover rounded-lg ">
+      class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg ">
       
   
   <img 
       src="gara/power.png" 
       alt="Project 2"  
-      class="w-[700px] h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
+      class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
 </div>
 
 
@@ -360,7 +411,7 @@
   </script>
 
       <!-- CV Section -->
-      <section id="cv" class="min-h-screen p-8 bg-white">
+      <section id="cv" class="min-h-screen p-4 md:p-8 bg-white">
       <div align="center" >
         <h2 class="text-2xl font-bold mb-2 text-gray-800" ><em>Curriculum Vitae</em></h2>
         <p class="mb-2">Welcome to my CV section! Here, you can find a summary of my professional background and skills.</p>
@@ -420,51 +471,3 @@
           <div align="center" style="margin-top: 20px;" >
         <p>For a detailed CV, you can download it <a href="path/to/your/cv.pdf" target="_blank" class="text-blue-600 hover:underline"><b>here.</b></a></p>
       </div>
-
-
-
-
-
-      </section>
-    </div>
-  </div>
-
-  <script>
-    const sectionIds = ['home', 'publications', 'gallery', 'cv'];
-
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-      updateActiveLink(id);
-    }
-
-    function updateActiveLink(activeId) {
-      sectionIds.forEach(id => {
-        const btn = document.getElementById('btn-' + id);
-        btn.classList.remove('active-link');
-      });
-      document.getElementById('btn-' + activeId).classList.add('active-link');
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          updateActiveLink(entry.target.id);
-        }
-      });
-    }, {
-      threshold: 0.6,
-    });
-
-    sectionIds.forEach(id => {
-      observer.observe(document.getElementById(id));
-    });
-
-    // Set Home as active on load
-    window.onload = () => updateActiveLink('home');
-
-
-    
-  </script>
-
-</body>
-</html>
