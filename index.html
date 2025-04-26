@@ -3,29 +3,157 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Shimiyana Jakroda</title>
+  <title>Shimiyana Jakroda | Computer Scientist & Tech Innovator</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-light: #93c5fd;
+      --primary-dark: #1d4ed8;
+      --secondary: #10b981;
+      --dark: #1e293b;
+      --light: #f8fafc;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f1f5f9;
+      color: var(--dark);
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
+    }
+    
+    .sidebar-bg {
+      background: linear-gradient(rgba(233, 37, 37, 0.7), rgba(119, 17, 17, 0.7)), 
+                  url('gara/MAIN.jpg') center/cover no-repeat;
+    }
+    
     .active-link {
-      background-color: #bfdbfe;
-      color: #1d4ed8;
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
       font-weight: 600;
       border-radius: 0.375rem;
-      padding: 0.25rem 0.5rem;
+      padding: 0.5rem 1rem;
+      transition: all 0.3s ease;
     }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1rem;
+    
+    .sidebar-link {
+      transition: all 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
     }
-    .gallery img {
-      width: 100%;
-      height: auto;
+    
+    .sidebar-link:hover {
+      background-color: rgba(245, 246, 248, 0.3);
+    }
+    
+    .profile-img {
+      border: 4px solid white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .section-title {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 50%;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    
+    .card {
+      background: white;
       border-radius: 0.5rem;
-      transition: transform 0.3s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
     }
-    .gallery img:hover {
-      transform: scale(1.05);
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2.0rem;
+    }
+    
+    .gallery-item {
+      border-radius: 0.5rem;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 1rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .gallery-item:hover .gallery-caption {
+      transform: translateY(0);
+    }
+    
+    .social-icon {
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      transform: translateY(-3px);
+      color: var(--primary-dark);
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-fadein {
+      animation: fadeIn 0.6s ease forwards;
+    }
+    
+    .delay-100 {
+      animation-delay: 0.1s;
+    }
+    
+    .delay-200 {
+      animation-delay: 0.2s;
+    }
+    
+    .delay-300 {
+      animation-delay: 0.3s;
     }
     
     /* Responsive additions */
@@ -33,219 +161,226 @@
       .flex {
         flex-direction: column;
       }
+      
       .sidebar-container {
         width: 100%;
         height: auto;
-        position: relative;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 50;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
       }
-      .h-screen {
-        height: auto;
+      
+      .sidebar-container.mobile-open {
+        transform: translateX(0);
       }
+      
       .sidebar-content {
-        position: relative;
+        height: 100vh;
+        overflow-y: auto;
       }
-      .slider-text {
-        height: auto !important;
+      
+      .mobile-menu-btn {
+        display: block;
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 100;
+        background: white;
+        padding: 0.75rem;
+        border-radius: 50%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
-      .slider-text-inner {
-        flex-direction: column !important;
-        height: auto !important;
+      
+      .main-content {
+        margin-top: 0;
       }
-      .desc, .gif-section {
-        width: 100% !important;
-      }
-      .flex-gap-4 {
-        flex-direction: column;
-      }
-      .flex-gap-4 img {
-        width: 100% !important;
-        height: auto !important;
-      }
-      .container > div {
-        flex-direction: column !important;
-      }
-      #publications .container > div {
-        flex-direction: column !important;
-      }
-      #publications p {
-        padding: 0 1rem;
+      
+      .section-title::after {
+        width: 30%;
       }
     }
     
     @media (min-width: 769px) {
-      .flex-gap-4 {
-        display: flex;
-        gap: 1rem;
-      }
       .sidebar-container {
-        width: 250px;
+        width: 300px;
         height: 100vh;
         overflow-y: auto;
       }
-      .sidebar-content {
-        height: 100%;
+      
+      .main-content {
+        margin-left: 300px;
       }
     }
-
-    /* Smooth scrolling */
-    html {
-      scroll-behavior: smooth;
+    
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-dark);
     }
   </style>
 </head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<body class="bg-gray-100 font-sans">
+<body class="gradient-bg">
 
-  <div class="flex">
-    <!-- Sidebar Container -->
-    <div class="sidebar-container sticky top-0">
-      <!-- Sidebar Content -->
-      <div class="sidebar-content bg-white shadow-lg p-6" style="background-image: url('gara/MAIN.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center;">
-        <img src="gara/port.jpg" alt="Profile Photo" class="w-32 h-32 rounded-full object-cover mx-auto md:mx-0" />
-        <h1 class="text-1xl font-bold mb-4 text-center md:text-left">Shimiyana Jakroda</h1>
-        <ul class="space-y-4">
-          <li><button onclick="scrollToSection('home')" id="btn-home" class="sidebar-link text-blue-600 hover:underline w-full text-center md:text-left">Home</button></li>
-          <li><button onclick="scrollToSection('publications')" id="btn-publications" class="sidebar-link text-blue-600 hover:underline w-full text-center md:text-left">Publications</button></li>
-          <li><button onclick="scrollToSection('gallery')" id="btn-gallery" class="sidebar-link text-blue-600 hover:underline w-full text-center md:text-left">Gallery</button></li>
-          <li><button onclick="scrollToSection('cv')" id="btn-cv" class="sidebar-link text-blue-600 hover:underline w-full text-center md:text-left">CV</button></li>
-        </ul>
-        <div class="mt-8 flex justify-center space-x-4">
-          <a href="https://github.com/ShimiyanaJakroda" target="_blank" style="color: #0A66C2; font-size: 24px;">
-            <i class="fab fa-github"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/shimiyana-jakroda-936636231/" target="_blank" style="color: #0A66C2; font-size: 24px;">
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a href="https://web.facebook.com/profile.php?id=100008951825637" target="_blank" style="color: #0A66C2; font-size: 24px;">
-            <i class="fab fa-facebook"></i>
-          </a>
+  <!-- Mobile menu button -->
+  <button class="mobile-menu-btn fixed z-50" id="mobileMenuBtn">
+    <i class="fas fa-bars text-xl text-blue-600"></i>
+  </button>
+
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <div class="sidebar-container sidebar-bg text-white shadow-xl" id="sidebarContainer">
+      <div class="sidebar-content p-6 flex flex-col items-center md:items-start">
+        <div class="text-center md:text-left mb-8 animate-fadein">
+          <img src="gara/port.jpg" alt="Shimiyana Jakroda" 
+               class="w-40 h-40 rounded-full object-cover profile-img mx-auto md:mx-0 mb-4">
+          <h1 class="text-2xl font-bold mb-1">Shimiyana Jakroda</h1>
+          <p class="text-blue-200">Computer Science Student</p>
+          <p class="text-sm text-blue-100 mt-2">Cavendish University Zambia</p>
+        </div>
+        
+        <nav class="w-full mb-8 animate-fadein delay-100">
+          <ul class="space-y-2">
+            <li>
+              <button onclick="scrollToSection('home')" id="btn-home" 
+                      class="sidebar-link w-full text-left flex items-center">
+                <i class="fas fa-home mr-3"></i> Home
+              </button>
+            </li>
+            <li>
+              <button onclick="scrollToSection('publications')" id="btn-publications" 
+                      class="sidebar-link w-full text-left flex items-center">
+                <i class="fas fa-book mr-3"></i> Publications
+              </button>
+            </li>
+            <li>
+              <button onclick="scrollToSection('gallery')" id="btn-gallery" 
+                      class="sidebar-link w-full text-left flex items-center">
+                <i class="fas fa-images mr-3"></i> Gallery
+              </button>
+            </li>
+            <li>
+              <button onclick="scrollToSection('cv')" id="btn-cv" 
+                      class="sidebar-link w-full text-left flex items-center">
+                <i class="fas fa-file-alt mr-3"></i> CV
+              </button>
+            </li>
+          </ul>
+        </nav>
+        
+        <div class="mt-auto w-full animate-fadein delay-200">
+          <h3 class="text-lg font-semibold mb-4">Connect With Me</h3>
+          <div class="flex justify-center md:justify-start space-x-4">
+            <a href="https://github.com/ShimiyanaJakroda" target="_blank" 
+               class="social-icon text-2xl text-white hover:text-blue-300">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/shimiyana-jakroda-936636231/" target="_blank" 
+               class="social-icon text-2xl text-white hover:text-blue-300">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://web.facebook.com/profile.php?id=100008951825637" target="_blank" 
+               class="social-icon text-2xl text-white hover:text-blue-300">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="mailto:shimiyanajakroda@gmail.com" 
+               class="social-icon text-2xl text-white hover:text-blue-300">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+          
+          <div class="mt-6 text-center md:text-left">
+            <p class="text-sm text-blue-100">© 2024 Shimiyana Jakroda</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Scrollable Content -->
-    <div class="flex-1 overflow-y-auto h-screen scroll-smooth" id="scrollContainer">
-      <section id="home" class="min-h-screen p-4 md:p-8 bg-gray-50">
-        <div class="slider-text animated fadeInUp" style="height: 607px;">
-          <div class="slider-text-inner" style="display: flex; align-items: center; gap: 40px; height: 607px;">
-            <div class="container">
-              <div style="display: flex; align-items: flex-start; gap: 20px;">
-                <!-- Text Content -->
-                <div class="desc" style="flex: 1;">
-                  <h1 style="font-family: 'Arial Black', sans-serif; font-weight: bold; font-size: 2.5em; margin-top: 0;">
-                    Hi! <br>I'm Shimiyana
-                  </h1>
-                  <h2 style="margin-top: 0;">
-                    I am Currently a Computer Science student at Cavendish University Zambia, with a strong passion for 
-                    cutting-edge technology and its transformative impact on society.Am specialized in Data Science and slowly incorporating Artificial Intelligence. Adept at 
-                    leveraging emerging technologies to solve complex problems and committed to continuous 
-                    learning in machine learning, automation, and scalable systems. Seeking opportunities 
-                    to contribute to innovative projects at the intersection of AI, Society, and software Development.
-                    <div align="left" style="margin-top: 20px;">
-                      <h1><u><b>Research Fileds of Interest:</b></u></h1>
-                      <ul class="list-disc pl-5 mb-4">
-                        <li>Artificial Intelligence</li>
-                        <li>Data Science</li>
-                        <li>Software Development</li>
-                        <li>Digital Literacy Programs for Refugees</li>
-                      </ul>
-                    </div>
-                    <div align="center" style="margin-top: 20px;">
-                      <h1><u><b>Contact:</b></u></h1>
-                      <p><b>Email:</b><em style="color:#1d4ed8"> shimiyanajakroda@gmail.com</em></p>
-                    </div>
-                  </h2>
-                </div>
-                
-                <!-- GIFs Column -->
-                <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
-                  <!-- First gif -->
-                  <div class="gif-section" align="left">
-                    <img src="Gif/ROBOTICS.gif" alt="Robot GIF" style="width: 100%; max-width: 400px; border-radius: 8px;">
-                    <p text align="left" style="font-family: 'garamond'; font-weight: italic; font-size: 1.0em; margin-top: 0;">My Team and I developed ClownBoat prototype using Python <br>and Java, incorporating remote control functionality and <br> programmable instruction sets for autonomous and manual navigation.</p>
+    <!-- Main Content -->
+    <div class="main-content flex-2 overflow-y-auto h-screen scroll-smooth" id="scrollContainer">
+      <!-- Home Section -->
+      <section id="home" class="min-h-screen p-6 md:p-12">
+        <div class="max-w-6xl mx-auto">
+          <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+            <div class="lg:w-1/2 animate-fadein">
+              <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
+                Hi, I'm <span class="text-blue-600">Shimiyana</span>
+              </h1>
+              
+              <div class="prose prose-lg text-gray-700 mb-8">
+                <p class="text-lg leading-relaxed">
+                  I'm a Computer Science student at Cavendish University Zambia with a passion for cutting-edge technology 
+                  and its transformative impact on society. Specializing in Data Science and Artificial Intelligence, 
+                  I'm dedicated to leveraging emerging technologies to solve complex problems.
+                </p>
+              </div>
+              
+              <div class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-800 section-title">
+                  Research Interests
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
+                    <i class="fas fa-robot text-blue-500 mb-2"></i>
+                    <h3 class="font-semibold">Artificial Intelligence</h3>
                   </div>
-                  
-                  <!-- Second gif -->
-                  <div class="gif-section" align="left">
-                    <img src="gara/Show.png" alt="Second GIF" style="width: 100%; max-width: 400px; border-radius: 8px;">
-                    <p align="left" style="font-family: 'garamond'; font-weight: italic; font-size: 1.0em; margin-top: 0;">(Co-represented the Cavendish University Zambia on 26th <br> August 2023 In Capture the Flag CTF Hosted by Digital Safe at UNICAF University in Lusaka, Zambia) – Cyber Security Hacking Competition</p>
+                  <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
+                    <i class="fas fa-database text-blue-500 mb-2"></i>
+                    <h3 class="font-semibold">Data Science</h3>
+                  </div>
+                  <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
+                    <i class="fas fa-code text-blue-500 mb-2"></i>
+                    <h3 class="font-semibold">Software Development</h3>
+                  </div>
+                  <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
+                    <i class="fas fa-globe text-blue-500 mb-2"></i>
+                    <h3 class="font-semibold">Digital Literacy Programs</h3>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Publications Section -->
-      <section id="publications" class="min-h-screen p-4 md:p-8 bg-white">
-        <h2 class="text-2xl font-bold mb-2 text-gray-800" align="center"><em>Publication</em></h2>
-        <br>
-        <div>
-          <div class="container">
-            <div style="display: flex; align-items: flex-start; gap: 20px;">
-              <h1 class="text-xl font-semibold mb-4">Brain Winners</h1><br>
-              <p><em>Shimiyana Jakroda & Kenneth Chitambo, <br>
-                Brain Winners. First published 26th January 2020.<br>
-                Publisher: Self, Lusaka. 2020.</em><br><br>
-                This book empowers readers to develop a positive mindset<br> for personal and professional success.  
-                It offers practical strategies,<br> inspiring stories, and tools for overcoming challenges.  
-                Each chapter <br>guides you to build resilience, stay motivated, and pursue<br> big dreams.  
-                By embracing optimism, you'll unlock your potential<br> and transform your life.
-              </p>
-
-              <!-- publications -->
-              <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
-                <!-- book-->
-                <div class="gif-section" align="center">
-                  <img src="gara/book.png" alt="Robot GIF" style="width: 100%; max-width: 400px; border-radius: 8px;">
-                  <p><em><b>ISBN: 978-9982-70-822-7</b></em></p>
-                </div>
+              
+              <div class="flex flex-wrap gap-4">
+                <a href="#cv" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">
+                  View My CV
+                </a>
+                <a href="#contact" class="border border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg font-medium transition">
+                  Contact Me
+                </a>
               </div>
             </div>
-          </div>
-
-          <!--Career-->
-          <div class="container">
-            <div style="display: flex; align-items: flex-start; gap: 20px;">
-              <h1 class="text-xl font-semibold mb-4">Career Paths<br> for Refugee<br> Students</h1><br>
-              <p><em>This magazine was authored by DAFI Zambia students.<br> As the DAFI President, I took the lead in planning 
-                and organizing<br> the event in collaboration with the executive team.</em><br><br>
-
-                Conference Summary<br>
-                The conference aimed to highlight career pathways for people <br>
-                on the move, focusing on scholarships, talent development,<br> and job opportunities.<br>
-                
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <em><b><u>Speakers included</u></b>:</em><br>
-                <b>Dr. Nicolas Maple</b> – Lecturer in Migration Studies, Universityof London.<br>
-                <br>
-                <b>Mainga Simoonga</b> – International Law Master's Student,<br>
-                University of Glasgow; African Excellence Scholar; Lawyer and Author.<br>
-                <br>
-                <b>Marie Françoise</b> – Pharmacist; President of the Zambia Union of Pharmacy <br>
-                Professionals; Founder of Life Lessons for a Girl Child.
-                <br><br>
-                <b>Esther Chongo Zulu</b>– Executive Director, YMCA Zambia; MBA student <br>
-                at Heriot-Watt University; Advocate for youth and women empowerment.
-                <br> <br>
-
-                <b>Dr. Murishi Onesphore</b> – Master's student in Project Management, University of London.
-              </p>
-
-              <!-- publications -->
-              <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
-                <!-- book-->
-                <div class="gif-section" align="center">
-                  <img src="gara/DAFI.jpg" alt="Robot GIF" style="width: 100%; max-width: 400px; border-radius: 8px;">
-                  <p>
-                    <a href="https://drive.google.com/file/d/1UYihoydbYyWIo_L_a7KRVDp724Jjo6Nz/view?usp=sharing" 
-                       target="_blank" 
-                       style="text-decoration: none; color: black;" 
-                       onmouseover="this.style.color='blue'" 
-                       onmouseout="this.style.color='black'">
-                      <b>Click here to access the Magazine</b>
-                    </a>
+            
+            <div class="lg:w-1/2 space-y-6 animate-fadein delay-100">
+              <div class="card overflow-hidden">
+                <img src="Gif/ROBOTICS.gif" alt="Robotics Project" class="w-full h-auto">
+                <div class="p-4">
+                  <h3 class="font-bold text-lg mb-2">ClownBoat Prototype</h3>
+                  <p class="text-gray-600">
+                    Developed with Python and Java, featuring remote control functionality and programmable instruction sets 
+                    for autonomous and manual navigation.
+                  </p>
+                </div>
+              </div>
+              
+              <div class="card overflow-hidden">
+                <img src="gara/Show.png" alt="CTF Competition" class="w-full h-auto">
+                <div class="p-4">
+                  <h3 class="font-bold text-lg mb-2">Capture The Flag Competition</h3>
+                  <p class="text-gray-600">
+                    Co-represented Cavendish University Zambia in the CTF hosted by Digital Safe at UNICAF University (August 2023).
                   </p>
                 </div>
               </div>
@@ -254,82 +389,332 @@
         </div>
       </section>
 
+      <!-- Publications Section -->
+      <section id="publications" class="min-h-screen bg-white p-6 md:p-12">
+        <div class="max-w-6xl mx-auto">
+          <h1 class="text-3xl md:text-4xl font-bold mb-12 text-center section-title">
+            My <span class="text-blue-600">Publications</span>
+          </h1>
+          
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Book Publication -->
+            <div class="card animate-fadein">
+              <div class="p-6">
+                <div class="flex items-start mb-4">
+                  <img src="gara/book.png" alt="Brain Winners" class="w-24 h-auto rounded shadow mr-6">
+                  <div>
+                    <h2 class="text-2xl font-bold mb-2">Brain Winners</h2>
+                    <p class="text-gray-600 mb-2">
+                      <em>Shimiyana Jakroda & Kenneth Chitambo</em>
+                    </p>
+                    <p class="text-sm text-gray-500">
+                      First published January 26, 2020 | ISBN: 978-9982-70-822-7
+                    </p>
+                  </div>
+                </div>
+                <p class="text-gray-700 mb-4">
+                  This book empowers readers to develop a positive mindset for personal and professional success. 
+                  It offers practical strategies, inspiring stories, and tools for overcoming challenges.
+                </p>
+                <div class="flex justify-between items-center">
+                  <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                    Self-Published
+                  </span>
+                  <button class="text-blue-600 hover:text-blue-800 font-medium">
+                    Learn More →
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- DAFI Magazine -->
+            <div class="card animate-fadein delay-100">
+              <div class="p-6">
+                <div class="flex items-start mb-4">
+                  <img src="gara/DAFI.jpg" alt="Career Paths for Refugee Students" class="w-24 h-auto rounded shadow mr-6">
+                  <div>
+                    <h2 class="text-2xl font-bold mb-2">Career Paths for Refugee Students</h2>
+                    <p class="text-gray-600 mb-2">
+                      <em>DAFI Zambia Students</em>
+                    </p>
+                    <p class="text-sm text-gray-500">
+                      Magazine | 2023
+                    </p>
+                  </div>
+                </div>
+                <p class="text-gray-700 mb-4">
+                  As DAFI President, I led the planning and organization of this event in collaboration with the executive team, 
+                  featuring notable speakers in migration studies and career development.
+                </p>
+                <div class="flex justify-between items-center">
+                  <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                    Conference Proceedings
+                  </span>
+                  <a href="https://drive.google.com/file/d/1UYihoydbYyWIo_L_a7KRVDp724Jjo6Nz/view?usp=sharing" 
+                     target="_blank" 
+                     class="text-blue-600 hover:text-blue-800 font-medium">
+                    View Magazine →
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-12 animate-fadein delay-200">
+            <h2 class="text-2xl font-semibold mb-6 section-title">Featured Speakers</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <h3 class="font-bold text-blue-600">Dr. Nicolas Maple</h3>
+                <p class="text-sm text-gray-600">Lecturer in Migration Studies, University of London</p>
+              </div>
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <h3 class="font-bold text-blue-600">Mainga Simoonga</h3>
+                <p class="text-sm text-gray-600">International Law Master's Student, University of Glasgow</p>
+              </div>
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <h3 class="font-bold text-blue-600">Marie Françoise</h3>
+                <p class="text-sm text-gray-600">Pharmacist & President, Zambia Union of Pharmacy Professionals</p>
+              </div>
+              <div class="bg-gray-50 p-4 rounded-lg">
+                <h3 class="font-bold text-blue-600">Esther Chongo Zulu</h3>
+                <p class="text-sm text-gray-600">Executive Director, YMCA Zambia</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Gallery Section -->
-      <section id="gallery" class="min-h-screen p-4 md:p-8 bg-gray-50">
-        <h2 class="text-2xl font-bold mb-2 text-gray-800" align="center"><em>Gallery</em></h2>
-
-        <div class="flex-gap-4">
-          <img src="gara/me.png" alt="Project 1" class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
-          <img src="gara/Brainv.jpg" alt="Project 2" class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
-        </div>
-
-        <br>
-        <div class="flex-gap-4">
-          <img src="gara/frame.jpg" alt="Project 1" class="w-full md:w-[400px] h-auto md:h-[500px] object-cover rounded-lg">
-          <img src="gara/ALRO.png" alt="Project 2" class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
-        </div>
-        <br>
-        <div class="flex-gap-4">
-          <img src="gara/german.png" alt="Project 1" class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg">
-          <img src="gara/power.png" alt="Project 2" class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
+      <section id="gallery" class="min-h-screen p-6 md:p-12 gradient-bg">
+        <div class="max-w-6xl mx-auto">
+          <h1 class="text-3xl md:text-4xl font-bold mb-12 text-center section-title">
+            My <span class="text-blue-600">Gallery</span>
+          </h1>
+          
+          <div class="gallery-grid animate-fadein">
+            <div class="gallery-item aspect-square">
+              <img src="gara/me.png" alt="Shimiyana Jakroda">
+              <div class="gallery-caption">
+                <h3 class="font-bold">Professional Portrait</h3>
+              </div>
+            </div>
+            
+            <div class="gallery-item aspect-square">
+              <img src="gara/Brainv.jpg" alt="Brain Winners">
+              <div class="gallery-caption">
+                <h3 class="font-bold">Brain Winners Book</h3>
+              </div>
+            </div>
+            
+            <div class="gallery-item aspect-square">
+              <img src="gara/frame.jpg" alt="Award">
+              <div class="gallery-caption">
+                <h3 class="font-bold">Award Recognition</h3>
+              </div>
+            </div>
+            
+            <div class="gallery-item aspect-square">
+              <img src="gara/ALRO.png" alt="Project">
+              <div class="gallery-caption">
+                <h3 class="font-bold">Project Demonstration</h3>
+              </div>
+            </div>
+            
+            <div class="gallery-item aspect-square">
+              <img src="gara/german.png" alt="Event">
+              <div class="gallery-caption">
+                <h3 class="font-bold">German Event Participation</h3>
+              </div>
+            </div>
+            
+            <div class="gallery-item aspect-square">
+              <img src="gara/power.png" alt="Presentation">
+              <div class="gallery-caption">
+                <h3 class="font-bold">Powerful Presentation</h3>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- CV Section -->
-      <section id="cv" class="min-h-screen p-4 md:p-8 bg-white">
-        <div align="center">
-          <h2 class="text-2xl font-bold mb-2 text-gray-800"><em>Curriculum Vitae</em></h2>
-          <p class="mb-2">Welcome to my CV section! Here, you can find a summary of my professional background and skills.</p>
-        </div>
-
-        <!-- experience -->
-        <div>
-          <h3 class="text-xl font-semibold mb-4"><u>Experience</u></h3>
-          <ul class="list-disc pl-5 mb-4">
-            <li>Caritas Czech Republic in Zambia (Literacy Instructor) (11th August 2024 to Present)</li>
-            <li>City of Jehovah Association (05/07/2022 to present)</li>
-            <li>Mansfield University(Preceptor) (2nd June 2023 to 7th April 2025)</li>
-            <li>HeziTech (21 /10/2021 to 10/04/2023)</li>
-          </ul>
-        </div>  
-
-        <!-- Education -->
-        <div>
-          <h3 class="text-xl font-semibold mb-4"><u>Education</u></h3>
-          <ul class="list-disc pl-5 mb-4">
-            <li>Bachelor of Science in Computer Science, Cavendish University Zambia (Expected Graduation:3rd April 2024)</li>
-            <li>Certificate in Cyber Virtual Assistant, Alx Africa & MasterCard, Completed 2024</li>
-            <li>High School Examination Councile of Zambia, Chinika Secondary School, Graduated November 2019</li>
-          </ul>
-        </div> 
-        <br>
-        <!-- Skills -->
-        <div>
-          <h3 class="text-xl font-semibold mb-4"><u>Skills</u></h3>
-          <ul class="list-disc pl-5 mb-4">
-            <li>Programming Languages: Python, Java, PHP</li>
-            <li>Web Development: HTML, CSS, Javascrip(Basic)</li>
-            <li>Data Analysis: Pandas, NumPy</li>
-            <li>Version Control: Git, GitHub</li>
-          </ul>
-        </div>
-
-        <!-- Current projects -->
-        <div class="projects-section" stly="space: 20px;">
-          <h2 class="text-xl font-semibold mb-4"><u>Current Projects</u></h2>
-          <p>Here are some of the projects I am currently working on:</p>
-          <div class="project-grid">
-            <!-- Project 1 -->
-            <div class="project-card">
-              <img src="gara/" alt="Project 1">
-              <h4>Digital Oasis for Refugees</h4>
-              <p>Brief description of the project and technologies used.</p>
-              <a href="#" class="project-link">View Project<em>(The system will be available on the 28th June)</em></a>
+      <section id="cv" class="min-h-screen bg-white p-6 md:p-12">
+        <div class="max-w-4xl mx-auto">
+          <h1 class="text-3xl md:text-4xl font-bold mb-12 text-center section-title">
+            My <span class="text-blue-600">Curriculum Vitae</span>
+          </h1>
+          
+          <div class="grid md:grid-cols-3 gap-8 mb-12 animate-fadein">
+            <div class="col-span-2">
+              <div class="card p-6">
+                <h2 class="text-2xl font-bold mb-6 text-blue-600">Professional Experience</h2>
+                
+                <div class="space-y-6">
+                  <div class="border-l-4 border-blue-500 pl-4">
+                    <h3 class="text-xl font-semibold">Literacy Instructor</h3>
+                    <p class="text-gray-600">Caritas Czech Republic in Zambia</p>
+                    <p class="text-sm text-gray-500">August 2024 - Present</p>
+                    <p class="mt-2 text-gray-700">
+                      Teaching digital literacy skills to underserved communities with a focus on practical applications.
+                    </p>
+                  </div>
+                  
+                  <div class="border-l-4 border-blue-500 pl-4">
+                    <h3 class="text-xl font-semibold">Preceptor</h3>
+                    <p class="text-gray-600">Mansfield University</p>
+                    <p class="text-sm text-gray-500">June 2023 - April 2025</p>
+                    <p class="mt-2 text-gray-700">
+                      Mentoring students in computer science fundamentals and guiding research projects.
+                    </p>
+                  </div>
+                  
+                  <div class="border-l-4 border-blue-500 pl-4">
+                    <h3 class="text-xl font-semibold">Tech Associate</h3>
+                    <p class="text-gray-600">HeziTech</p>
+                    <p class="text-sm text-gray-500">October 2021 - April 2023</p>
+                    <p class="mt-2 text-gray-700">
+                      Developed software solutions and provided technical support for various projects.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="card p-6 mb-6">
+                <h2 class="text-2xl font-bold mb-4 text-blue-600">Education</h2>
+                
+                <div class="space-y-4">
+                  <div>
+                    <h3 class="font-semibold">BSc Computer Science</h3>
+                    <p class="text-gray-600">Cavendish University Zambia</p>
+                    <p class="text-sm text-gray-500">Expected April 2024</p>
+                  </div>
+                  
+                  <div>
+                    <h3 class="font-semibold">Cyber Virtual Assistant</h3>
+                    <p class="text-gray-600">ALX Africa & MasterCard</p>
+                    <p class="text-sm text-gray-500">Completed 2024</p>
+                  </div>
+                  
+                  <div>
+                    <h3 class="font-semibold">High School Diploma</h3>
+                    <p class="text-gray-600">Chinika Secondary School</p>
+                    <p class="text-sm text-gray-500">Graduated 2019</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="card p-6">
+                <h2 class="text-2xl font-bold mb-4 text-blue-600">Skills</h2>
+                
+                <div class="space-y-3">
+                  <div>
+                    <h3 class="font-medium">Programming</h3>
+                    <div class="flex flex-wrap gap-2 mt-1">
+                      <span class="bg-blue-100 text-blue-800 text-xs px-2.5 py-0.5 rounded">Python</span>
+                      <span class="bg-blue-100 text-blue-800 text-xs px-2.5 py-0.5 rounded">Java</span>
+                      <span class="bg-blue-100 text-blue-800 text-xs px-2.5 py-0.5 rounded">PHP</span>
+                    </div>
+                  </div>
+                  
+                 
+                  
+                  <div>
+                    <h3 class="font-medium">Data Science</h3>
+                    <div class="flex flex-wrap gap-2 mt-1">
+                      <span class="bg-purple-100 text-purple-800 text-xs px-2.5 py-0.5 rounded">Pandas</span>
+                      <span class="bg-purple-100 text-purple-800 text-xs px-2.5 py-0.5 rounded">NumPy</span>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h3 class="font-medium">Tools</h3>
+                    <div class="flex flex-wrap gap-2 mt-1">
+                      <span class="bg-yellow-100 text-yellow-800 text-xs px-2.5 py-0.5 rounded">Git</span>
+                      <span class="bg-yellow-100 text-yellow-800 text-xs px-2.5 py-0.5 rounded">GitHub</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+          
+          <div class="card p-6 animate-fadein delay-100">
+            <h2 class="text-2xl font-bold mb-6 text-blue-600">Current Projects</h2>
+            
+            <div class="bg-blue-50 rounded-lg p-6">
+              <h3 class="text-xl font-semibold mb-2">Digital Oasis for Refugees</h3>
+              <p class="text-gray-700 mb-4">
+                Developing a comprehensive digital literacy platform specifically designed for refugee communities, 
+                focusing on practical skills that enhance employability and integration.
+              </p>
+              <div class="flex items-center">
+                <span class="bg-blue-600 text-white text-xs font-medium px-2.5 py-0.5 rounded mr-2">
+                  Coming Soon
+                </span>
+                <span class="text-sm text-gray-500">Launching June 28, 2024</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="text-center mt-12 animate-fadein delay-200">
+            <a href="path/to/your/cv.pdf" target="_blank" 
+               class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition">
+              <i class="fas fa-download mr-2"></i> Download Full CV
+            </a>
+          </div>
         </div>
-        <div align="center" style="margin-top: 20px;">
-          <p>For a detailed CV, you can download it <a href="path/to/your/cv.pdf" target="_blank" class="text-blue-600 hover:underline"><b>here.</b></a></p>
+      </section>
+      
+      <!-- Contact Section -->
+      <section id="contact" class="min-h-screen p-6 md:p-12 gradient-bg">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-3xl md:text-4xl font-bold mb-6">Let's Connect</h1>
+          <p class="text-xl text-gray-700 mb-12 max-w-2xl mx-auto">
+            I'm always interested in hearing about new opportunities, collaborations, or just chatting about technology!
+          </p>
+          
+          <div class="grid md:grid-cols-3 gap-8 mb-12 animate-fadein">
+            <div class="card p-6">
+              <i class="fas fa-envelope text-4xl text-blue-600 mb-4"></i>
+              <h3 class="text-xl font-semibold mb-2">Email</h3>
+              <a href="mailto:shimiyanajakroda@gmail.com" class="text-blue-600 hover:underline">
+                shimiyanajakroda@gmail.com
+              </a>
+            </div>
+            
+            <div class="card p-6">
+              <i class="fas fa-map-marker-alt text-4xl text-blue-600 mb-4"></i>
+              <h3 class="text-xl font-semibold mb-2">Location</h3>
+              <p class="text-gray-600">Lusaka, Zambia</p>
+            </div>
+            
+            <div class="card p-6">
+              <i class="fas fa-calendar-alt text-4xl text-blue-600 mb-4"></i>
+              <h3 class="text-xl font-semibold mb-2">Availability</h3>
+              <p class="text-gray-600">Open to opportunities</p>
+            </div>
+          </div>
+          
+          <div class="flex justify-center space-x-6 mb-12">
+            <a href="https://github.com/ShimiyanaJakroda" target="_blank" 
+               class="social-icon text-3xl text-gray-700 hover:text-blue-600">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/shimiyana-jakroda-936636231/" target="_blank" 
+               class="social-icon text-3xl text-gray-700 hover:text-blue-600">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://web.facebook.com/profile.php?id=100008951825637" target="_blank" 
+               class="social-icon text-3xl text-gray-700 hover:text-blue-600">
+              <i class="fab fa-facebook"></i>
+            </a>
+          </div>
+          
+          <p class="text-gray-600">
+            © 2025 Shimiyana Jakroda. All rights reserved.
+          </p>
         </div>
       </section>
     </div>
@@ -337,8 +722,24 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const sectionIds = ['home', 'publications', 'gallery', 'cv'];
+      const sectionIds = ['home', 'publications', 'gallery', 'cv', 'contact'];
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const sidebarContainer = document.getElementById('sidebarContainer');
       
+      // Toggle mobile menu
+      mobileMenuBtn.addEventListener('click', function() {
+        sidebarContainer.classList.toggle('mobile-open');
+      });
+      
+      // Close mobile menu when clicking a link
+      document.querySelectorAll('.sidebar-link').forEach(link => {
+        link.addEventListener('click', function() {
+          if (window.innerWidth <= 768) {
+            sidebarContainer.classList.remove('mobile-open');
+          }
+        });
+      });
+
       // Smooth scroll function
       function scrollToSection(id) {
         const element = document.getElementById(id);
@@ -373,8 +774,8 @@
           }
         });
       }, {
-        threshold: 0.5,
-        rootMargin: '0px 0px -50% 0px'
+        threshold: 0.3,
+        rootMargin: '0px 0px -40% 0px'
       });
 
       // Observe all sections
@@ -399,22 +800,53 @@
         }
       });
 
-      // Make sidebar scroll with content
-      const sidebarContainer = document.querySelector('.sidebar-container');
-      const mainContent = document.getElementById('scrollContainer');
-      
-      if (sidebarContainer && mainContent) {
-        mainContent.addEventListener('scroll', function() {
-          sidebarContainer.scrollTop = mainContent.scrollTop;
-        });
+      // Only sync scrolling on desktop
+      if (window.innerWidth > 768) {
+        const mainContent = document.getElementById('scrollContainer');
         
-        // Also sync sidebar scroll to main content (two-way sync)
-        sidebarContainer.addEventListener('scroll', function() {
-          mainContent.scrollTop = sidebarContainer.scrollTop;
+        if (sidebarContainer && mainContent) {
+          let isScrolling = false;
+          
+          mainContent.addEventListener('scroll', function() {
+            if (!isScrolling) {
+              isScrolling = true;
+              sidebarContainer.scrollTop = mainContent.scrollTop;
+              setTimeout(() => { isScrolling = false; }, 100);
+            }
+          });
+          
+          sidebarContainer.addEventListener('scroll', function() {
+            if (!isScrolling) {
+              isScrolling = true;
+              mainContent.scrollTop = sidebarContainer.scrollTop;
+              setTimeout(() => { isScrolling = false; }, 100);
+            }
+          });
+        }
+      }
+      
+      // Animate elements when they come into view
+      const animateOnScroll = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fadein');
+          }
         });
+      }, {
+        threshold: 0.1
+      });
+      
+      document.querySelectorAll('.card, .section-title, .gallery-grid').forEach(el => {
+        animateOnScroll.observe(el);
+      });
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        document.getElementById('sidebarContainer').classList.remove('mobile-open');
       }
     });
   </script>
-
 </body>
 </html>
