@@ -33,7 +33,7 @@
       .flex {
         flex-direction: column;
       }
-      .w-59 {
+      .sidebar-container {
         width: 100%;
         height: auto;
         position: relative;
@@ -41,7 +41,7 @@
       .h-screen {
         height: auto;
       }
-      .sticky {
+      .sidebar-content {
         position: relative;
       }
       .slider-text {
@@ -77,135 +77,136 @@
         display: flex;
         gap: 1rem;
       }
-      .w-59 {
+      .sidebar-container {
         width: 250px;
+        height: 100vh;
+        overflow-y: auto;
+      }
+      .sidebar-content {
+        height: 100%;
       }
     }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
   </style>
-  
 </head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <body class="bg-gray-100 font-sans">
 
-
   <div class="flex">
-    <!-- Sidebar -->
-    <div class="w-59 h-screen sticky top-0 bg-white shadow-lg p-6" style="background-image: url('gara/MAIN.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center;">
+    <!-- Sidebar Container -->
+    <div class="sidebar-container sticky top-0">
+      <!-- Sidebar Content -->
+      <div class="sidebar-content bg-white shadow-lg p-6" style="background-image: url('gara/MAIN.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center;">
         <img src="gara/port.jpg" alt="Profile Photo" class="w-32 h-32 rounded-full object-cover mx-auto md:mx-0" />
-      <h1 class="text-1xl font-bold mb-4 text-center md:text-left">Shimiyana Jakroda</h1>
-      <ul class="space-y-4">
-        <li><button onclick="scrollToSection('home')" id="btn-home" class="sidebar-link text-blue-600 hover:underline w-full text-center md:text-left">Home</button></li>
-        <li><button onclick="scrollToSection('publications')" id="btn-publications" class="sidebar-link text-blue-600 hover:underline w-full text-center md:text-left">Publications</button></li>
-        <li><button onclick="scrollToSection('gallery')" id="btn-gallery" class="sidebar-link text-blue-600 hover:underline w-full text-center md:text-left">Gallery</button></li>
-        <li><button onclick="scrollToSection('cv')" id="btn-cv" class="sidebar-link text-blue-600 hover:underline w-full text-center md:text-left">CV</button></li>
-      </ul>
-      <div class="mt-8 flex justify-center space-x-4">
-        <a href="https://github.com/ShimiyanaJakroda" target="_blank" style="color: #0A66C2; font-size: 24px;">
-          <i class="fab fa-github"></i>
-        </a>
-      <a href="https://www.linkedin.com/in/shimiyana-jakroda-936636231/" target="_blank" style="color: #0A66C2; font-size: 24px;">
-        <i class="fab fa-linkedin"></i>
-      </a>
-      <a href="https://web.facebook.com/profile.php?id=100008951825637" target="_blank" style="color: #0A66C2; font-size: 24px;">
-        <i class="fab fa-facebook"></i>
-      </a>
+        <h1 class="text-1xl font-bold mb-4 text-center md:text-left">Shimiyana Jakroda</h1>
+        <ul class="space-y-4">
+          <li><button onclick="scrollToSection('home')" id="btn-home" class="sidebar-link text-blue-600 hover:underline w-full text-center md:text-left">Home</button></li>
+          <li><button onclick="scrollToSection('publications')" id="btn-publications" class="sidebar-link text-blue-600 hover:underline w-full text-center md:text-left">Publications</button></li>
+          <li><button onclick="scrollToSection('gallery')" id="btn-gallery" class="sidebar-link text-blue-600 hover:underline w-full text-center md:text-left">Gallery</button></li>
+          <li><button onclick="scrollToSection('cv')" id="btn-cv" class="sidebar-link text-blue-600 hover:underline w-full text-center md:text-left">CV</button></li>
+        </ul>
+        <div class="mt-8 flex justify-center space-x-4">
+          <a href="https://github.com/ShimiyanaJakroda" target="_blank" style="color: #0A66C2; font-size: 24px;">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/shimiyana-jakroda-936636231/" target="_blank" style="color: #0A66C2; font-size: 24px;">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://web.facebook.com/profile.php?id=100008951825637" target="_blank" style="color: #0A66C2; font-size: 24px;">
+            <i class="fab fa-facebook"></i>
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- Scrollable Content -->
     <div class="flex-1 overflow-y-auto h-screen scroll-smooth" id="scrollContainer">
       <section id="home" class="min-h-screen p-4 md:p-8 bg-gray-50">
-        <div class="slider-text animated fadeInUp" style="height: 607px;"  >
-            <div class="slider-text-inner" style="display: flex; align-items: center; gap: 40px; height: 607px;"   >
-              
-              <div class="container" >
-
-                <div style="display: flex; align-items: flex-start; gap: 20px;">
-                    <!-- Text Content -->
-                    <div class="desc" style="flex: 1;">
-                        <h1 style="font-family: 'Arial Black', sans-serif; font-weight: bold; font-size: 2.5em; margin-top: 0;">
-                            Hi! <br>I'm Shimiyana
-                        </h1>
-                        <h2 style="margin-top: 0;">
-                            I am Currently a Computer Science student at Cavendish University Zambia, with a strong passion for 
-                             cutting-edge technology and its transformative impact on society.Am specialized in Data Science and slowly incorporating Artificial Intelligence. Adept at 
-                             leveraging emerging technologies to solve complex problems and committed to continuous 
-                             learning in machine learning, automation, and scalable systems. Seeking opportunities 
-                             to contribute to innovative projects at the intersection of AI, Society, and software Development.
-                             <div  align="left" style="margin-top: 20px;">
-                              <h1 ><u><b>Research Fileds of Interest:</b></u></h1>
-                              <ul class="list-disc pl-5 mb-4">
-                                <li>Artificial Intelligence</li>
-                                <li>Data Science</li>
-                                <li>Software Development</li>
-                                <li>Digital Literacy Programs for Refugees</li>
-                              <ul>
-                             </div>
-                                
-                                  <div align="center" style="margin-top: 20px;" >
-                                    <h1><u><b>Contact:</b></u></h1>
-                                    <p><b>Email:</b><em style="color:#1d4ed8"> shimiyanajakroda@gmail.com</em></p>
-                                  </div>
-                                  
-                                  
-                            
-                        </h2>
+        <div class="slider-text animated fadeInUp" style="height: 607px;">
+          <div class="slider-text-inner" style="display: flex; align-items: center; gap: 40px; height: 607px;">
+            <div class="container">
+              <div style="display: flex; align-items: flex-start; gap: 20px;">
+                <!-- Text Content -->
+                <div class="desc" style="flex: 1;">
+                  <h1 style="font-family: 'Arial Black', sans-serif; font-weight: bold; font-size: 2.5em; margin-top: 0;">
+                    Hi! <br>I'm Shimiyana
+                  </h1>
+                  <h2 style="margin-top: 0;">
+                    I am Currently a Computer Science student at Cavendish University Zambia, with a strong passion for 
+                    cutting-edge technology and its transformative impact on society.Am specialized in Data Science and slowly incorporating Artificial Intelligence. Adept at 
+                    leveraging emerging technologies to solve complex problems and committed to continuous 
+                    learning in machine learning, automation, and scalable systems. Seeking opportunities 
+                    to contribute to innovative projects at the intersection of AI, Society, and software Development.
+                    <div align="left" style="margin-top: 20px;">
+                      <h1><u><b>Research Fileds of Interest:</b></u></h1>
+                      <ul class="list-disc pl-5 mb-4">
+                        <li>Artificial Intelligence</li>
+                        <li>Data Science</li>
+                        <li>Software Development</li>
+                        <li>Digital Literacy Programs for Refugees</li>
+                      </ul>
                     </div>
-                    
-                    <!-- GIFs Column -->
-                    <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
-                        <!-- First gif -->
-                        <div class="gif-section" align="left">
-                            <img src="Gif/ROBOTICS.gif" alt="Robot GIF" style="width: 100%; max-width: 400px; border-radius: 8px;">
-                            <p text align="left"  style="font-family: 'garamond'; font-weight: italic; font-size: 1.0em; margin-top: 0;">My Team and I developed ClownBoat prototype using Python <br>and Java, incorporating remote control functionality and <br> programmable instruction sets for autonomous and manual navigation.</p>
-                        </div>
-                        
-                        <!-- Second gif -->
-                        <div class="gif-section" align="left">
-                            <img src="gara/Show.png" alt="Second GIF" style="width: 100%; max-width: 400px; border-radius: 8px;">
-                            <p  align="left"   style="font-family: 'garamond'; font-weight: italic; font-size: 1.0em; margin-top: 0;">(Co-represented the Cavendish University Zambia on 26th <br> August 2023 In Capture the Flag CTF Hosted by Digital Safe at UNICAF University in Lusaka, Zambia) – Cyber Security Hacking Competition</p>
-                        </div>
+                    <div align="center" style="margin-top: 20px;">
+                      <h1><u><b>Contact:</b></u></h1>
+                      <p><b>Email:</b><em style="color:#1d4ed8"> shimiyanajakroda@gmail.com</em></p>
                     </div>
+                  </h2>
                 </div>
+                
+                <!-- GIFs Column -->
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
+                  <!-- First gif -->
+                  <div class="gif-section" align="left">
+                    <img src="Gif/ROBOTICS.gif" alt="Robot GIF" style="width: 100%; max-width: 400px; border-radius: 8px;">
+                    <p text align="left" style="font-family: 'garamond'; font-weight: italic; font-size: 1.0em; margin-top: 0;">My Team and I developed ClownBoat prototype using Python <br>and Java, incorporating remote control functionality and <br> programmable instruction sets for autonomous and manual navigation.</p>
+                  </div>
+                  
+                  <!-- Second gif -->
+                  <div class="gif-section" align="left">
+                    <img src="gara/Show.png" alt="Second GIF" style="width: 100%; max-width: 400px; border-radius: 8px;">
+                    <p align="left" style="font-family: 'garamond'; font-weight: italic; font-size: 1.0em; margin-top: 0;">(Co-represented the Cavendish University Zambia on 26th <br> August 2023 In Capture the Flag CTF Hosted by Digital Safe at UNICAF University in Lusaka, Zambia) – Cyber Security Hacking Competition</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            
-    </section>
+          </div>
+        </div>
+      </section>
 
       <!-- Publications Section -->
       <section id="publications" class="min-h-screen p-4 md:p-8 bg-white">
         <h2 class="text-2xl font-bold mb-2 text-gray-800" align="center"><em>Publication</em></h2>
-          <!-- Book publication -->
-           <br>
+        <br>
         <div>
-          
-            <div class="container" >
-              <div style="display: flex; align-items: flex-start; gap: 20px;">
-                <h1 class="text-xl font-semibold mb-4">Brain Winners</h1><br>
-                <p><em>Shimiyana Jakroda & Kenneth Chitambo, <br>
-                  Brain Winners. First published 26th January 2020.<br>
-                  Publisher: Self, Lusaka. 2020.</em><br><br>
-                  This book empowers readers to develop a positive mindset<br> for personal and professional success.  
-                  It offers practical strategies,<br> inspiring stories, and tools for overcoming challenges.  
-                  Each chapter <br>guides you to build resilience, stay motivated, and pursue<br> big dreams.  
-                  By embracing optimism, you'll unlock your potential<br> and transform your life.
-                
-                </p>
+          <div class="container">
+            <div style="display: flex; align-items: flex-start; gap: 20px;">
+              <h1 class="text-xl font-semibold mb-4">Brain Winners</h1><br>
+              <p><em>Shimiyana Jakroda & Kenneth Chitambo, <br>
+                Brain Winners. First published 26th January 2020.<br>
+                Publisher: Self, Lusaka. 2020.</em><br><br>
+                This book empowers readers to develop a positive mindset<br> for personal and professional success.  
+                It offers practical strategies,<br> inspiring stories, and tools for overcoming challenges.  
+                Each chapter <br>guides you to build resilience, stay motivated, and pursue<br> big dreams.  
+                By embracing optimism, you'll unlock your potential<br> and transform your life.
+              </p>
 
-                  <!-- publications -->
-                  <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
-                      <!-- book-->
-                      <div class="gif-section" align="center">
-                          <img src="gara/book.png" alt="Robot GIF" style="width: 100%; max-width: 400px; border-radius: 8px;">
-                          <p><em><b>ISBN: 978-9982-70-822-7</b></em></p>
-                    </div>
-                    
-                  </div>
+              <!-- publications -->
+              <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
+                <!-- book-->
+                <div class="gif-section" align="center">
+                  <img src="gara/book.png" alt="Robot GIF" style="width: 100%; max-width: 400px; border-radius: 8px;">
+                  <p><em><b>ISBN: 978-9982-70-822-7</b></em></p>
+                </div>
               </div>
+            </div>
           </div>
 
-<!--Career-->
-
-          <div class="container" >
+          <!--Career-->
+          <div class="container">
             <div style="display: flex; align-items: flex-start; gap: 20px;">
               <h1 class="text-xl font-semibold mb-4">Career Paths<br> for Refugee<br> Students</h1><br>
               <p><em>This magazine was authored by DAFI Zambia students.<br> As the DAFI President, I took the lead in planning 
@@ -230,217 +231,106 @@
                 <br> <br>
 
                 <b>Dr. Murishi Onesphore</b> – Master's student in Project Management, University of London.
-
-              
-               
-              
               </p>
 
-                <!-- publications -->
-                <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;" >
-                    <!-- book-->
-                    <div class="gif-section" align="center">
-                        <img src="gara/DAFI.jpg" alt="Robot GIF" style="width: 100%; max-width: 400px; border-radius: 8px;">
-                        <p>
-                          <a href="https://drive.google.com/file/d/1UYihoydbYyWIo_L_a7KRVDp724Jjo6Nz/view?usp=sharing" 
-                             target="_blank" 
-                             style="text-decoration: none; color: black;" 
-                             onmouseover="this.style.color='blue'" 
-                             onmouseout="this.style.color='black'">
-                            <b>Click here to access the Magazine</b>
-                          </a>
-                        </p>
-                      
-                  </div>
-                  
+              <!-- publications -->
+              <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
+                <!-- book-->
+                <div class="gif-section" align="center">
+                  <img src="gara/DAFI.jpg" alt="Robot GIF" style="width: 100%; max-width: 400px; border-radius: 8px;">
+                  <p>
+                    <a href="https://drive.google.com/file/d/1UYihoydbYyWIo_L_a7KRVDp724Jjo6Nz/view?usp=sharing" 
+                       target="_blank" 
+                       style="text-decoration: none; color: black;" 
+                       onmouseover="this.style.color='blue'" 
+                       onmouseout="this.style.color='black'">
+                      <b>Click here to access the Magazine</b>
+                    </a>
+                  </p>
                 </div>
+              </div>
             </div>
-        </div>
-
-        <!--Add more publications -->
-
-        <!--end here-->
-
+          </div>
         </div>
       </section>
 
-   
       <!-- Gallery Section -->
-<section id="gallery" class="min-h-screen p-4 md:p-8 bg-gray-50"  >
-    <h2 class="text-2xl font-bold mb-2 text-gray-800" align="center"><em>Gallery</em></h2>
+      <section id="gallery" class="min-h-screen p-4 md:p-8 bg-gray-50">
+        <h2 class="text-2xl font-bold mb-2 text-gray-800" align="center"><em>Gallery</em></h2>
 
-    <div class="flex-gap-4"> <!-- Adjust gap (spacing) as needed -->
-      <img 
-          src="gara/me.png" 
-          alt="Project 1"  
-          class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
-      
-      <img 
-          src="gara/Brainv.jpg" 
-          alt="Project 2"  
-          class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
-  </div>
+        <div class="flex-gap-4">
+          <img src="gara/me.png" alt="Project 1" class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
+          <img src="gara/Brainv.jpg" alt="Project 2" class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
+        </div>
 
-<br>
-  <div class="flex-gap-4"> <!-- Adjust gap (spacing) as needed -->
-    <img 
-        src="gara/frame.jpg" 
-        alt="Project 1"  
-        class="w-full md:w-[400px] h-auto md:h-[500px] object-cover rounded-lg ">
-        
-    
-    <img 
-        src="gara/ALRO.png" 
-        alt="Project 2"  
-        class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
-</div>
-<br>
-<div class="flex-gap-4"> <!-- Adjust gap (spacing) as needed -->
-  <img 
-      src="gara/german.png" 
-      alt="Project 1"  
-      class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg ">
-      
-  
-  <img 
-      src="gara/power.png" 
-      alt="Project 2"  
-      class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
-</div>
-
-
-    <div>
-      
-      <!-- Add more images as needed -->
-    </div>
-  </section>
-  
-  <style>
-    /* Base Gallery Styles */
-    .gallery-grid {
-      display: grid;
-      transition: all 0.3s ease;
-    }
-    
-    /* Column Variations */
-    .gallery-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .gallery-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .gallery-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    
-    /* Gap Variations */
-    .gallery-gap-2 { gap: 0.5rem; }
-    .gallery-gap-4 { gap: 1rem; }
-    .gallery-gap-6 { gap: 1.5rem; }
-    
-    /* Masonry Layout */
-    .gallery-masonry {
-      column-count: 3;
-      column-gap: 1rem;
-    }
-    .gallery-masonry .gallery-item {
-      break-inside: avoid;
-      margin-bottom: 1rem;
-    }
-    
-    /* Gallery Item Styles */
-    .gallery-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 0.5rem;
-    }
-    
-    .gallery-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 0.5rem;
-      transition: opacity 0.3s ease;
-    }
-    
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      .gallery-cols-3, .gallery-cols-4 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .gallery-masonry {
-        column-count: 2;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .gallery-grid {
-        grid-template-columns: 1fr !important;
-      }
-      .gallery-masonry {
-        column-count: 1;
-      }
-    }
-  </style>
+        <br>
+        <div class="flex-gap-4">
+          <img src="gara/frame.jpg" alt="Project 1" class="w-full md:w-[400px] h-auto md:h-[500px] object-cover rounded-lg">
+          <img src="gara/ALRO.png" alt="Project 2" class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
+        </div>
+        <br>
+        <div class="flex-gap-4">
+          <img src="gara/german.png" alt="Project 1" class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg">
+          <img src="gara/power.png" alt="Project 2" class="w-full md:w-[700px] h-auto md:h-[500px] object-cover rounded-lg transition-all duration-300 group-hover:scale-105">
+        </div>
+      </section>
 
       <!-- CV Section -->
       <section id="cv" class="min-h-screen p-4 md:p-8 bg-white">
-      <div align="center" >
-        <h2 class="text-2xl font-bold mb-2 text-gray-800" ><em>Curriculum Vitae</em></h2>
-        <p class="mb-2">Welcome to my CV section! Here, you can find a summary of my professional background and skills.</p>
-      </div>
+        <div align="center">
+          <h2 class="text-2xl font-bold mb-2 text-gray-800"><em>Curriculum Vitae</em></h2>
+          <p class="mb-2">Welcome to my CV section! Here, you can find a summary of my professional background and skills.</p>
+        </div>
 
-            <!-- experience -->
-      <div>
-        <h3 class="text-xl font-semibold mb-4"><u>Experience</u></h3>
-        <ul class="list-disc pl-5 mb-4 "  >
-          <li>Caritas Czech Republic in Zambia (Literacy Instructor)   ( 11th August 2024 to Present)</li>
-          <li>City of Jehovah Association   ( 05/07/2022 to present)</li>
-          <li>Mansfield University(Preceptor)   (2nd June 2023 to 7th April 2025)</li>
-          <li>HeziTech    (21 /10/2021 to 10/04/2023)</li>
-         
-        </ul>
-     </div>  
-
-      <!-- Education -->
-     <div>
-        <h3 class="text-xl font-semibold mb-4"><u>Education</u></h3>
-        <ul class="list-disc pl-5 mb-4 "  >
-          <li>Bachelor of Science in Computer Science, Cavendish University Zambia (Expected Graduation:3rd April 2024)</li>
-          <li>Certificate in Cyber Virtual Assistant , Alx Africa & MasterCard, Completed 2024</li>
-          <li>High School Examination Councile of Zambia, Chinika Secondary School, Graduated November 2019</li>
-        </ul>
-      </div> 
-          <br>
-           <!-- Skills -->
+        <!-- experience -->
         <div>
-        <h3 class="text-xl font-semibold mb-4"><u>Skills</u></h3>
-        <ul class="list-disc pl-5 mb-4 "  >
-          <li>Programming Languages: Python, Java,PHP </li>
-          <li>Web Development: HTML, CSS, Javascrip(Basic)</li>
-          <li>Data Analysis: Pandas, NumPy</li>
-          <li>Version Control: Git, GitHub</li>
-        </ul>
-      </div>
+          <h3 class="text-xl font-semibold mb-4"><u>Experience</u></h3>
+          <ul class="list-disc pl-5 mb-4">
+            <li>Caritas Czech Republic in Zambia (Literacy Instructor) (11th August 2024 to Present)</li>
+            <li>City of Jehovah Association (05/07/2022 to present)</li>
+            <li>Mansfield University(Preceptor) (2nd June 2023 to 7th April 2025)</li>
+            <li>HeziTech (21 /10/2021 to 10/04/2023)</li>
+          </ul>
+        </div>  
 
-           <!-- Current projects -->
-           <div class="projects-section" stly="space: 20px;">
-            <h2 class="text-xl font-semibold mb-4"><u>Current Projects</u></h2>
-            <p>Here are some of the projects I am currently working on:</p>
-            <div class="project-grid">
-              <!-- Project 1 -->
-              <div class="project-card">
-                <img src="gara/" alt="Project 1">
-                <h4>Digital Oasis for Refugees</h4>
-                <p>Brief description of the project and technologies used.</p>
-                <a href="#" class="project-link">View Project<em>(The system will be available on the 28th June)</em></a>
-              </div>
-              
-            
-              
-              <!-- Add more projects as needed -->
+        <!-- Education -->
+        <div>
+          <h3 class="text-xl font-semibold mb-4"><u>Education</u></h3>
+          <ul class="list-disc pl-5 mb-4">
+            <li>Bachelor of Science in Computer Science, Cavendish University Zambia (Expected Graduation:3rd April 2024)</li>
+            <li>Certificate in Cyber Virtual Assistant, Alx Africa & MasterCard, Completed 2024</li>
+            <li>High School Examination Councile of Zambia, Chinika Secondary School, Graduated November 2019</li>
+          </ul>
+        </div> 
+        <br>
+        <!-- Skills -->
+        <div>
+          <h3 class="text-xl font-semibold mb-4"><u>Skills</u></h3>
+          <ul class="list-disc pl-5 mb-4">
+            <li>Programming Languages: Python, Java, PHP</li>
+            <li>Web Development: HTML, CSS, Javascrip(Basic)</li>
+            <li>Data Analysis: Pandas, NumPy</li>
+            <li>Version Control: Git, GitHub</li>
+          </ul>
+        </div>
+
+        <!-- Current projects -->
+        <div class="projects-section" stly="space: 20px;">
+          <h2 class="text-xl font-semibold mb-4"><u>Current Projects</u></h2>
+          <p>Here are some of the projects I am currently working on:</p>
+          <div class="project-grid">
+            <!-- Project 1 -->
+            <div class="project-card">
+              <img src="gara/" alt="Project 1">
+              <h4>Digital Oasis for Refugees</h4>
+              <p>Brief description of the project and technologies used.</p>
+              <a href="#" class="project-link">View Project<em>(The system will be available on the 28th June)</em></a>
             </div>
           </div>
-          <div align="center" style="margin-top: 20px;" >
-        <p>For a detailed CV, you can download it <a href="path/to/your/cv.pdf" target="_blank" class="text-blue-600 hover:underline"><b>here.</b></a></p>
-      </div>
+        </div>
+        <div align="center" style="margin-top: 20px;">
+          <p>For a detailed CV, you can download it <a href="path/to/your/cv.pdf" target="_blank" class="text-blue-600 hover:underline"><b>here.</b></a></p>
+        </div>
       </section>
     </div>
   </div>
@@ -508,6 +398,21 @@
           });
         }
       });
+
+      // Make sidebar scroll with content
+      const sidebarContainer = document.querySelector('.sidebar-container');
+      const mainContent = document.getElementById('scrollContainer');
+      
+      if (sidebarContainer && mainContent) {
+        mainContent.addEventListener('scroll', function() {
+          sidebarContainer.scrollTop = mainContent.scrollTop;
+        });
+        
+        // Also sync sidebar scroll to main content (two-way sync)
+        sidebarContainer.addEventListener('scroll', function() {
+          mainContent.scrollTop = sidebarContainer.scrollTop;
+        });
+      }
     });
   </script>
 
