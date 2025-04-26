@@ -77,6 +77,9 @@
         display: flex;
         gap: 1rem;
       }
+      .w-59 {
+        width: 250px;
+      }
     }
   </style>
   
@@ -376,39 +379,6 @@
       }
     }
   </style>
-  
-  <script>
-    // Gallery Layout Controls
-    function changeLayout(layoutType) {
-      const gallery = document.getElementById('gallery-container');
-      
-      if (layoutType === 'masonry') {
-        gallery.classList.add('gallery-masonry');
-        gallery.classList.remove('gallery-grid', 'gallery-cols-2', 'gallery-cols-3', 'gallery-cols-4');
-      } else {
-        gallery.classList.remove('gallery-masonry');
-        gallery.classList.add('gallery-grid');
-        
-        // Keep current column count
-        const currentCols = Array.from(gallery.classList).find(c => c.startsWith('gallery-cols-'));
-        if (!currentCols) gallery.classList.add('gallery-cols-3');
-      }
-    }
-    
-    function changeColumns(columns) {
-      const gallery = document.getElementById('gallery-container');
-      
-      // Remove all column classes
-      gallery.classList.remove('gallery-cols-2', 'gallery-cols-3', 'gallery-cols-4');
-      
-      // Add selected column class
-      gallery.classList.add(`gallery-cols-${columns}`);
-      
-      // Ensure we're in grid mode
-      gallery.classList.remove('gallery-masonry');
-      gallery.classList.add('gallery-grid');
-    }
-  </script>
 
       <!-- CV Section -->
       <section id="cv" class="min-h-screen p-4 md:p-8 bg-white">
@@ -471,3 +441,75 @@
           <div align="center" style="margin-top: 20px;" >
         <p>For a detailed CV, you can download it <a href="path/to/your/cv.pdf" target="_blank" class="text-blue-600 hover:underline"><b>here.</b></a></p>
       </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sectionIds = ['home', 'publications', 'gallery', 'cv'];
+      
+      // Smooth scroll function
+      function scrollToSection(id) {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          updateActiveLink(id);
+        }
+      }
+
+      // Update active link
+      function updateActiveLink(activeId) {
+        sectionIds.forEach(id => {
+          const btn = document.getElementById('btn-' + id);
+          if (btn) {
+            btn.classList.remove('active-link');
+          }
+        });
+        const activeBtn = document.getElementById('btn-' + activeId);
+        if (activeBtn) {
+          activeBtn.classList.add('active-link');
+        }
+      }
+
+      // Intersection Observer to detect which section is in view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            updateActiveLink(entry.target.id);
+          }
+        });
+      }, {
+        threshold: 0.5,
+        rootMargin: '0px 0px -50% 0px'
+      });
+
+      // Observe all sections
+      sectionIds.forEach(id => {
+        const section = document.getElementById(id);
+        if (section) {
+          observer.observe(section);
+        }
+      });
+
+      // Set Home as active on load
+      updateActiveLink('home');
+
+      // Add click event listeners to all sidebar links
+      sectionIds.forEach(id => {
+        const btn = document.getElementById('btn-' + id);
+        if (btn) {
+          btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            scrollToSection(id);
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
