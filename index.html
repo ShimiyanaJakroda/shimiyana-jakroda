@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Shimiyana Jakroda | Computer Scientist & Tech Innovator</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
@@ -14,886 +16,1116 @@
       --secondary: #10b981;
       --dark: #1e293b;
       --light: #f8fafc;
+      --sidebar-w: 280px;
     }
-    
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f1f5f9;
+      font-family: 'DM Sans', sans-serif;
+      background: #f1f5f9;
       color: var(--dark);
+      overflow-x: hidden;
     }
-    
-    .gradient-bg {
-      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #e2e8f0; }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+
+    /* ══════════════════════════════
+       LAYOUT
+    ══════════════════════════════ */
+    .layout {
+      display: flex;
+      min-height: 100vh;
     }
-    
-    .sidebar-bg {
-      background: linear-gradient(rgba(233, 37, 37, 0.7), rgba(119, 17, 17, 0.7)), 
-                  url('gara/MAIN.jpg') center/cover no-repeat;
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      position: fixed;
+      top: 0; left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 200;
+      background:
+        linear-gradient(160deg, rgba(29,78,216,0.88) 0%, rgba(15,23,42,0.92) 100%),
+        url('gara/MAIN.jpg') center/cover no-repeat;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.5rem;
+      transition: transform 0.35s cubic-bezier(.4,0,.2,1);
     }
-    
-    .active-link {
-      background-color: var(--primary-light);
-      color: var(--primary-dark);
+
+    .sidebar-avatar {
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255,255,255,0.6);
+      box-shadow: 0 0 0 6px rgba(255,255,255,0.1);
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .sidebar-role {
+      font-size: 0.78rem;
+      color: var(--primary-light);
+      margin-top: 0.25rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .sidebar-uni {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.55);
+      margin-top: 0.15rem;
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+      margin: 1.5rem 0;
+    }
+
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; }
+
+    .sidebar-nav button {
+      width: 100%;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.75);
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 500;
+      text-align: left;
+      padding: 0.6rem 0.85rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .sidebar-nav button:hover,
+    .sidebar-nav button.active {
+      background: rgba(255,255,255,0.14);
+      color: white;
+    }
+
+    .sidebar-nav button.active {
+      background: rgba(59,130,246,0.45);
+      color: white;
       font-weight: 600;
-      border-radius: 0.375rem;
-      padding: 0.5rem 1rem;
-      transition: all 0.3s ease;
     }
-    
-    .sidebar-link {
-      transition: all 0.3s ease;
-      padding: 0.5rem 1rem;
-      border-radius: 0.375rem;
+
+    .sidebar-nav button i { width: 16px; text-align: center; }
+
+    .sidebar-socials {
+      margin-top: auto;
+      padding-top: 1.5rem;
     }
-    
-    .sidebar-link:hover {
-      background-color: rgba(245, 246, 248, 0.3);
+
+    .sidebar-socials h4 {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 0.75rem;
     }
-    
-    .profile-img {
-      border: 4px solid white;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    .social-row { display: flex; gap: 0.85rem; }
+
+    .social-row a {
+      color: rgba(255,255,255,0.65);
+      font-size: 1.15rem;
+      transition: color 0.2s, transform 0.2s;
+      text-decoration: none;
     }
-    
-    .section-title {
-      position: relative;
-      display: inline-block;
-      margin-bottom: 2rem;
+
+    .social-row a:hover {
+      color: white;
+      transform: translateY(-2px);
     }
-    
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 50%;
-      height: 4px;
+
+    .sidebar-copy {
+      margin-top: 1.25rem;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      overflow-x: hidden;
+    }
+
+    /* ══════════════════════════════
+       TOPBAR (mobile only)
+    ══════════════════════════════ */
+    .topbar {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 56px;
+      background: white;
+      border-bottom: 1px solid #e2e8f0;
+      align-items: center;
+      padding: 0 1rem;
+      z-index: 300;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    }
+
+    .topbar-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--dark);
+      margin-left: 0.75rem;
+    }
+
+    .topbar-menu-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 8px;
+      color: var(--dark);
+      font-size: 1.1rem;
+      transition: background 0.2s;
+    }
+
+    .topbar-menu-btn:hover { background: #f1f5f9; }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 190;
+      backdrop-filter: blur(2px);
+    }
+
+    /* ══════════════════════════════
+       SECTION BASE
+    ══════════════════════════════ */
+    section {
+      padding: 4rem 3rem;
+      min-height: 100vh;
+    }
+
+    .section-inner { max-width: 900px; margin: 0 auto; }
+
+    .section-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-heading span { color: var(--primary); }
+
+    .section-sub {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 2.5rem;
+    }
+
+    .heading-bar {
+      width: 48px; height: 4px;
       background: var(--primary);
       border-radius: 2px;
+      margin-bottom: 2.5rem;
     }
-    
-    .card {
+
+    /* ══════════════════════════════
+       HOME SECTION
+    ══════════════════════════════ */
+    #home {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #dbeafe 100%);
+      padding-top: 5rem;
+    }
+
+    .home-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .home-greeting {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .home-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+
+    .home-name span { color: var(--primary); }
+
+    .home-bio {
+      font-size: 0.97rem;
+      line-height: 1.75;
+      color: #475569;
+      margin-bottom: 2rem;
+    }
+
+    .interests-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .interest-chip {
       background: white;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 3px solid var(--primary);
+      border-radius: 0 8px 8px 0;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.83rem;
+      font-weight: 600;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .interest-chip i { color: var(--primary); font-size: 0.85rem; }
+
+    .btn-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--primary-dark);
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      border: none; cursor: pointer;
+    }
+
+    .btn-primary:hover { background: #1e40af; transform: translateY(-1px); }
+
+    .btn-outline {
+      border: 1.5px solid var(--primary);
+      color: var(--primary);
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      background: transparent;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-outline:hover { background: #eff6ff; transform: translateY(-1px); }
+
+    /* project cards in home */
+    .home-cards { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .proj-card {
+      background: white;
+      border-radius: 12px;
       overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-    
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+    .proj-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.12); }
+
+    .proj-card img { width: 100%; height: 180px; object-fit: cover; display: block; }
+
+    .proj-card-body { padding: 1rem 1.2rem; }
+
+    .proj-card-body h3 { font-size: 0.97rem; font-weight: 700; margin-bottom: 0.4rem; }
+
+    .proj-card-body p { font-size: 0.82rem; color: #64748b; line-height: 1.6; }
+
+    /* ══════════════════════════════
+       PUBLICATIONS SECTION
+    ══════════════════════════════ */
+    #publications { background: white; }
+
+    .pub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
     }
-    
+
+    .pub-card {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid #e2e8f0;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .pub-card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.08); }
+
+    .pub-card-header {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .pub-card-header img {
+      width: 72px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+
+    .pub-card-header h2 { font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .pub-card-header em { font-size: 0.8rem; color: #64748b; }
+    .pub-card-header .pub-meta { font-size: 0.75rem; color: #94a3b8; margin-top: 0.2rem; }
+
+    .pub-desc { font-size: 0.83rem; color: #475569; line-height: 1.65; margin-bottom: 1rem; }
+
+    .pub-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    .badge-blue { background: #dbeafe; color: #1d4ed8; }
+    .badge-green { background: #d1fae5; color: #065f46; }
+
+    .link-arrow { font-size: 0.82rem; font-weight: 600; color: var(--primary); text-decoration: none; }
+    .link-arrow:hover { color: var(--primary-dark); }
+
+    .other-pubs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .other-pub-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .other-pub-item h3 { font-size: 0.85rem; font-weight: 700; color: var(--primary); margin-bottom: 0.4rem; }
+    .other-pub-item p { font-size: 0.78rem; color: #64748b; margin-bottom: 0.5rem; line-height: 1.5; }
+
+    /* ══════════════════════════════
+       GALLERY SECTION
+    ══════════════════════════════ */
+    #gallery {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #dbeafe 100%);
+    }
+
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 2.0rem;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.25rem;
     }
-    
+
     .gallery-item {
-      border-radius: 0.5rem;
+      border-radius: 12px;
       overflow: hidden;
+      aspect-ratio: 1;
       position: relative;
-      transition: transform 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
-    
+
     .gallery-item img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
+      display: block;
       transition: transform 0.5s ease;
     }
-    
-    .gallery-item:hover img {
-      transform: scale(1.1);
-    }
-    
+
+    .gallery-item:hover img { transform: scale(1.08); }
+
     .gallery-caption {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.7);
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(15,23,42,0.9), transparent);
       color: white;
-      padding: 1rem;
+      padding: 1.25rem 1rem 0.9rem;
       transform: translateY(100%);
       transition: transform 0.3s ease;
+      font-size: 0.8rem;
+      font-weight: 500;
+      line-height: 1.4;
     }
-    
-    .gallery-item:hover .gallery-caption {
-      transform: translateY(0);
+
+    .gallery-item:hover .gallery-caption { transform: translateY(0); }
+
+    /* ══════════════════════════════
+       CV SECTION
+    ══════════════════════════════ */
+    #cv { background: white; }
+
+    .cv-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
     }
-    
-    .social-icon {
-      transition: all 0.3s ease;
+
+    .cv-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
     }
-    
-    .social-icon:hover {
-      transform: translateY(-3px);
+
+    .cv-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
       color: var(--primary-dark);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid #dbeafe;
     }
-    
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+
+    .exp-item {
+      border-left: 3px solid var(--primary);
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
     }
-    
-    .animate-fadein {
-      animation: fadeIn 0.6s ease forwards;
+
+    .exp-item:last-child { margin-bottom: 0; }
+
+    .exp-item h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.15rem; }
+    .exp-item .org { font-size: 0.82rem; color: var(--primary); font-weight: 600; }
+    .exp-item .dates { font-size: 0.75rem; color: #94a3b8; margin-bottom: 0.4rem; }
+    .exp-item p { font-size: 0.82rem; color: #475569; line-height: 1.6; }
+
+    .edu-item { margin-bottom: 1.1rem; }
+    .edu-item:last-child { margin-bottom: 0; }
+    .edu-item h3 { font-size: 0.88rem; font-weight: 700; }
+    .edu-item .org { font-size: 0.8rem; color: var(--primary); }
+    .edu-item .dates { font-size: 0.75rem; color: #94a3b8; }
+
+    .skill-section { margin-bottom: 1rem; }
+    .skill-section h3 { font-size: 0.82rem; font-weight: 600; margin-bottom: 0.4rem; color: #475569; }
+
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .skill-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
     }
-    
-    .delay-100 {
-      animation-delay: 0.1s;
+
+    .tag-blue { background: #dbeafe; color: #1d4ed8; }
+    .tag-purple { background: #ede9fe; color: #5b21b6; }
+    .tag-yellow { background: #fef3c7; color: #92400e; }
+
+    .project-highlight {
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
     }
-    
-    .delay-200 {
-      animation-delay: 0.2s;
+
+    .project-highlight h3 { font-size: 0.97rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .project-highlight p { font-size: 0.82rem; color: #475569; line-height: 1.6; margin-bottom: 0.75rem; }
+    .project-highlight .badge-row { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+    .project-highlight .dates-text { font-size: 0.75rem; color: #64748b; }
+
+    .cv-download-row { text-align: center; margin-top: 2rem; }
+
+    /* ══════════════════════════════
+       CONTACT SECTION
+    ══════════════════════════════ */
+    #contact {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 60%, #dbeafe 100%);
     }
-    
-    .delay-300 {
-      animation-delay: 0.3s;
+
+    .contact-heading { text-align: center; margin-bottom: 3rem; }
+
+    .contact-heading h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      margin-bottom: 0.75rem;
     }
-    
-    /* Responsive additions */
-    @media (max-width: 768px) {
-      .flex {
-        flex-direction: column;
-      }
-      
-      .sidebar-container {
-        width: 100%;
-        height: auto;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 50;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-      }
-      
-      .sidebar-container.mobile-open {
-        transform: translateX(0);
-      }
-      
-      .sidebar-content {
-        height: 100vh;
-        overflow-y: auto;
-      }
-      
-      .mobile-menu-btn {
-        display: block;
-        position: fixed;
-        top: 1rem;
-        left: 1rem;
-        z-index: 100;
-        background: white;
-        padding: 0.75rem;
-        border-radius: 50%;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-      
-      .main-content {
-        margin-top: 0;
-      }
-      
-      .section-title::after {
-        width: 30%;
-      }
+
+    .contact-heading p { color: #64748b; font-size: 0.97rem; max-width: 500px; margin: 0 auto; }
+
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
     }
-    
-    @media (min-width: 769px) {
-      .sidebar-container {
-        width: 300px;
-        height: 100vh;
-        overflow-y: auto;
-      }
-      
-      .main-content {
-        margin-left: 300px;
-      }
+
+    .contact-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      transition: transform 0.3s;
     }
-    
-    /* Scrollbar styling */
-    ::-webkit-scrollbar {
-      width: 8px;
+
+    .contact-card:hover { transform: translateY(-4px); }
+    .contact-card i { font-size: 1.75rem; color: var(--primary); margin-bottom: 0.75rem; }
+    .contact-card h3 { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .contact-card a, .contact-card p { font-size: 0.8rem; color: #64748b; word-break: break-all; text-decoration: none; }
+    .contact-card a:hover { color: var(--primary); }
+
+    .contact-socials {
+      display: flex; justify-content: center; gap: 1.25rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
     }
-    
-    ::-webkit-scrollbar-track {
-      background: #f1f1f1;
+
+    .contact-socials a {
+      color: #64748b;
+      font-size: 1.5rem;
+      text-decoration: none;
+      transition: color 0.2s, transform 0.2s;
     }
-    
-    ::-webkit-scrollbar-thumb {
-      background: var(--primary);
-      border-radius: 4px;
+
+    .contact-socials a:hover { color: var(--primary); transform: translateY(-2px); }
+
+    .contact-copy { text-align: center; font-size: 0.78rem; color: #94a3b8; }
+
+    /* ══════════════════════════════
+       ANIMATIONS
+    ══════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--primary-dark);
+
+    .fade-up { animation: fadeUp 0.6s ease both; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+
+    /* ══════════════════════════════
+       RESPONSIVE — TABLET 768-1023
+    ══════════════════════════════ */
+    @media (max-width: 1023px) {
+      :root { --sidebar-w: 260px; }
+      section { padding: 3.5rem 2rem; }
+      .home-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .pub-grid { grid-template-columns: 1fr; }
+      .cv-grid { grid-template-columns: 1fr; }
+      .contact-cards { grid-template-columns: 1fr; max-width: 340px; }
+    }
+
+    /* ══════════════════════════════
+       RESPONSIVE — MOBILE < 768
+    ══════════════════════════════ */
+    @media (max-width: 767px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+
+      .topbar { display: flex; }
+      .overlay.show { display: block; }
+
+      .main { margin-left: 0; padding-top: 56px; }
+
+      section { padding: 2.5rem 1.25rem; min-height: auto; }
+
+      .home-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .interests-grid { grid-template-columns: 1fr; }
+
+      .proj-card img { height: 160px; }
+
+      .pub-grid { grid-template-columns: 1fr; }
+      .pub-card-header { flex-direction: column; }
+      .pub-card-header img { width: 60px; }
+
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
+
+      .cv-grid { grid-template-columns: 1fr; }
+
+      .contact-cards { grid-template-columns: 1fr; max-width: 100%; }
+    }
+
+    @media (max-width: 400px) {
+      .gallery-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-<body class="gradient-bg">
+<body>
 
-  <!-- Mobile menu button -->
-  <button class="mobile-menu-btn fixed z-50" id="mobileMenuBtn">
-    <i class="fas fa-bars text-xl text-blue-600"></i>
-  </button>
+  <!-- TOPBAR (mobile) -->
+  <header class="topbar" id="topbar">
+    <button class="topbar-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+      <i class="fas fa-bars"></i>
+    </button>
+    <span class="topbar-name">Shimiyana Jakroda</span>
+  </header>
 
-  <div class="flex min-h-screen">
-    <!-- Sidebar -->
-    <div class="sidebar-container sidebar-bg text-white shadow-xl" id="sidebarContainer">
-      <div class="sidebar-content p-6 flex flex-col items-center md:items-start">
-        <div class="text-center md:text-left mb-8 animate-fadein">
-          <img src="gara/port.jpg" alt="Shimiyana Jakroda" 
-               class="w-40 h-40 rounded-full object-cover profile-img mx-auto md:mx-0 mb-4">
-          <h1 class="text-2xl font-bold mb-1">Shimiyana Jakroda</h1>
-          <p class="text-blue-200">Computer Science Student</p>
-          <p class="text-sm text-blue-100 mt-2">Cavendish University Zambia</p>
+  <!-- OVERLAY (mobile) -->
+  <div class="overlay" id="overlay"></div>
+
+  <div class="layout">
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar" id="sidebar">
+      <div style="display:flex;flex-direction:column;height:100%;">
+        <div class="fade-up" style="margin-bottom:1.25rem;">
+          <img src="gara/port.jpg" alt="Shimiyana Jakroda" class="sidebar-avatar">
+          <div class="sidebar-name">Shimiyana Jakroda</div>
+          <div class="sidebar-role">Computer Scientist</div>
+          <div class="sidebar-uni">Cavendish University Zambia</div>
         </div>
-        
-        <nav class="w-full mb-8 animate-fadein delay-100">
-          <ul class="space-y-2">
-            <li>
-              <button onclick="scrollToSection('home')" id="btn-home" 
-                      class="sidebar-link w-full text-left flex items-center">
-                <i class="fas fa-home mr-3"></i> Home
-              </button>
-            </li>
-            <li>
-              <button onclick="scrollToSection('publications')" id="btn-publications" 
-                      class="sidebar-link w-full text-left flex items-center">
-                <i class="fas fa-book mr-3"></i> Publications
-              </button>
-            </li>
-            <li>
-              <button onclick="scrollToSection('gallery')" id="btn-gallery" 
-                      class="sidebar-link w-full text-left flex items-center">
-                <i class="fas fa-images mr-3"></i> Gallery
-              </button>
-            </li>
-            <li>
-              <button onclick="scrollToSection('cv')" id="btn-cv" 
-                      class="sidebar-link w-full text-left flex items-center">
-                <i class="fas fa-file-alt mr-3"></i> CV
-              </button>
-            </li>
+
+        <div class="sidebar-divider"></div>
+
+        <nav class="fade-up delay-1">
+          <ul class="sidebar-nav" id="sidebarNav">
+            <li><button onclick="goTo('home')" id="btn-home" class="active">
+              <i class="fas fa-home"></i> Home
+            </button></li>
+            <li><button onclick="goTo('publications')" id="btn-publications">
+              <i class="fas fa-book"></i> Publications
+            </button></li>
+            <li><button onclick="goTo('gallery')" id="btn-gallery">
+              <i class="fas fa-images"></i> Gallery
+            </button></li>
+            <li><button onclick="goTo('cv')" id="btn-cv">
+              <i class="fas fa-file-alt"></i> CV
+            </button></li>
+            <li><button onclick="goTo('contact')" id="btn-contact">
+              <i class="fas fa-envelope"></i> Contact
+            </button></li>
           </ul>
         </nav>
-        
-        <div class="mt-auto w-full animate-fadein delay-200">
-          <h3 class="text-lg font-semibold mb-4">Connect With Me</h3>
-          <div class="flex justify-center md:justify-start space-x-4">
-            <a href="https://github.com/ShimiyanaJakroda" target="_blank" 
-               class="social-icon text-2xl text-white hover:text-blue-300">
-              <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/shimiyana-jakroda-936636231/" target="_blank" 
-               class="social-icon text-2xl text-white hover:text-blue-300">
-              <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="https://web.facebook.com/profile.php?id=100008951825637" target="_blank" 
-               class="social-icon text-2xl text-white hover:text-blue-300">
-              <i class="fab fa-facebook"></i>
-            </a>
-            <a href="mailto:shimiyanajakroda@gmail.com" 
-               class="social-icon text-2xl text-white hover:text-blue-300">
-              <i class="fas fa-envelope"></i>
-            </a>
+
+        <div class="sidebar-socials fade-up delay-2">
+          <h4>Connect</h4>
+          <div class="social-row">
+            <a href="https://github.com/ShimiyanaJakroda" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/shimiyana-jakroda-936636231/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://web.facebook.com/profile.php?id=100008951825637" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="mailto:shimiyanajakroda@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.researchgate.net/profile/Shimiyana-Jakroda" target="_blank"><i class="fab fa-researchgate"></i></a>
           </div>
-          
-          <div class="mt-6 text-center md:text-left">
-            <p class="text-sm text-blue-100">© 2024 Shimiyana Jakroda</p>
-          </div>
+          <div class="sidebar-copy">© 2026 Shimiyana Jakroda</div>
         </div>
       </div>
-    </div>
+    </aside>
 
-    <!-- Main Content -->
-    <div class="main-content flex-2 overflow-y-auto h-screen scroll-smooth" id="scrollContainer">
-      <!-- Home Section -->
-      <section id="home" class="min-h-screen p-6 md:p-12">
-        <div class="max-w-6xl mx-auto">
-          <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-            <div class="lg:w-1/2 animate-fadein">
-              <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
-                Hi, I'm <span class="text-blue-600">Shimiyana</span>
-              </h1>
-              
-              <div class="prose prose-lg text-gray-700 mb-8">
-                <p class="text-lg leading-relaxed">
-                  I'm a Computer Science student at Cavendish University Zambia with a passion for cutting-edge technology 
-                  and its transformative impact on society. Specializing in Software Development, Data Science and Artificial Intelligence, 
-                  I'm dedicated to leveraging emerging technologies to solve complex problems.
-                </p>
-              </div>
-              
-              <div class="mb-8">
-                <h2 class="text-2xl font-semibold mb-4 text-gray-800 section-title">
-                  Research Interests
-                </h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
-                    <i class="fas fa-robot text-blue-500 mb-2"></i>
-                    <h3 class="font-semibold">Artificial Intelligence</h3>
-                  </div>
-                  <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
-                    <i class="fas fa-database text-blue-500 mb-2"></i>
-                    <h3 class="font-semibold">Data Science</h3>
-                  </div>
-                  <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
-                    <i class="fas fa-code text-blue-500 mb-2"></i>
-                    <h3 class="font-semibold">Software Development</h3>
-                  </div>
-                  <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
-                    <i class="fas fa-globe text-blue-500 mb-2"></i>
-                    <h3 class="font-semibold">Digital Literacy Programs for Refugees</h3>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="flex flex-wrap gap-4">
-                <a href="#cv" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">
-                  View My CV
-                </a>
-                <a href="#contact" class="border border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg font-medium transition">
-                  Contact Me
-                </a>
-              </div>
-            </div>
-            
-            <div class="lg:w-1/2 space-y-6 animate-fadein delay-100">
-              <div class="card overflow-hidden">
-                <img src="Gif/ROBOTICS.gif" alt="Robotics Project" class="w-full h-auto">
-                <div class="p-4">
-                  <h3 class="font-bold text-lg mb-2">ClownBoat Prototype</h3>
-                  <p class="text-gray-600">
-                    Developed with Python and Java, featuring remote control functionality and programmable instruction sets 
-                    for autonomous and manual navigation.
-                  </p>
-                </div>
-              </div>
-              
-              <div class="card overflow-hidden">
-                <img src="gara/Show.png" alt="CTF Competition" class="w-full h-auto">
-                <div class="p-4">
-                  <h3 class="font-bold text-lg mb-2">Capture The Flag Competition</h3>
-                  <p class="text-gray-600">
-                    Co-represented Cavendish University Zambia in the CTF hosted by Digital Safe at UNICAF University (August 2023).
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <!-- ── MAIN ── -->
+    <main class="main" id="main">
 
-      <!-- Publications Section -->
-      <section id="publications" class="min-h-screen bg-white p-6 md:p-12">
-        <div class="max-w-6xl mx-auto">
-          <h1 class="text-3xl md:text-4xl font-bold mb-12 text-center section-title">
-            My <span class="text-blue-600">Publications</span>
-          </h1>
-          
-          <div class="grid md:grid-cols-2 gap-8">
-            <!-- Book Publication -->
-            <div class="card animate-fadein">
-              <div class="p-6">
-                <div class="flex items-start mb-4">
-                  <img src="gara/book.png" alt="Brain Winners" class="w-24 h-auto rounded shadow mr-6">
-                  <div>
-                    <h2 class="text-2xl font-bold mb-2">Brain Winners</h2>
-                    <p class="text-gray-600 mb-2">
-                      <em>Shimiyana Jakroda & Kenneth Chitambo</em>
-                    </p>
-                    <p class="text-sm text-gray-500">
-                      First published January 26, 2020 | ISBN: 978-9982-70-822-7
-                    </p>
-                  </div>
-                </div>
-                <p class="text-gray-700 mb-4">
-                  This book empowers readers to develop a positive mindset for personal and professional success. 
-                  It offers practical strategies, inspiring stories, and tools for overcoming challenges.
-                </p>
-                <div class="flex justify-between items-center">
-                  <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">
-                    Self-Published
-                  </span>
-                  <button class="text-blue-600 hover:text-blue-800 font-medium">
-                    Learn More →
-                  </button>
-                </div>
-              </div>
-            </div>
-            
-            <!-- DAFI Magazine -->
-            <div class="card animate-fadein delay-100">
-              <div class="p-6">
-                <div class="flex items-start mb-4">
-                  <img src="gara/DAFI.jpg" alt="Career Paths for Refugee Students" class="w-24 h-auto rounded shadow mr-6">
-                  <div>
-                    <h2 class="text-2xl font-bold mb-2">Career Paths for Refugee Students</h2>
-                    <p class="text-gray-600 mb-2">
-                      <em>DAFI Zambia Students</em>
-                    </p>
-                    <p class="text-sm text-gray-500">
-                      Magazine | 2023
-                    </p>
-                  </div>
-                </div>
-                <p class="text-gray-700 mb-4">
-                  As DAFI President, I led the planning and organization of this event in collaboration with the executive team, 
-                  featuring notable speakers in migration studies and career development.
-                </p>
-                <div class="flex justify-between items-center">
-                  <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
-                    Conference Proceedings
-                  </span>
-                  <a href="https://drive.google.com/file/d/1UYihoydbYyWIo_L_a7KRVDp724Jjo6Nz/view?usp=sharing" 
-                     target="_blank" 
-                     class="text-blue-600 hover:text-blue-800 font-medium">
-                    View Magazine →
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="mt-12 animate-fadein delay-200">
-            <h2 class="text-2xl font-semibold mb-6 section-title">Featured Speakers</h2>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <h3 class="font-bold text-blue-600">Dr. Nicolas Maple</h3>
-                <p class="text-sm text-gray-600">Lecturer in Migration Studies, University of London</p>
-              </div>
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <h3 class="font-bold text-blue-600">Mainga Simoonga</h3>
-                <p class="text-sm text-gray-600">International Law Master's Student, University of Glasgow</p>
-              </div>
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <h3 class="font-bold text-blue-600">Marie Françoise</h3>
-                <p class="text-sm text-gray-600">Pharmacist & President, Zambia Union of Pharmacy Professionals</p>
-              </div>
-              <div class="bg-gray-50 p-4 rounded-lg">
-                <h3 class="font-bold text-blue-600">Dr Murish</h3>
-                <p class="text-sm text-gray-600">Johns Hopkins University Master  in Public Relations</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Gallery Section -->
-      <section id="gallery" class="min-h-screen p-6 md:p-12 gradient-bg">
-        <div class="max-w-6xl mx-auto">
-          <h1 class="text-3xl md:text-4xl font-bold mb-12 text-center section-title">
-            My <span class="text-blue-600">Gallery</span>
-          </h1>
-          
-          <div class="gallery-grid animate-fadein">
-            <div class="gallery-item aspect-square">
-              <img src="gara/me.png" alt="Shimiyana Jakroda">
-              <div class="gallery-caption">
-                <h3 class="font-bold">Presenting a painting titled"Raised" at the Germany Embassy</h3>
-              </div>
-            </div>
-            
-            <div class="gallery-item aspect-square">
-              <img src="gara/Brainv.jpg" alt="Brain Winners">
-              <div class="gallery-caption">
-                <h3 class="font-bold">Publication of Brain Winners at the University of Zambia</h3>
-              </div>
-            </div>
-            
-            <div class="gallery-item aspect-square">
-              <img src="gara/frame.jpg" alt="Award">
-              <div class="gallery-caption">
-                <h3 class="font-bold">Hackathon Capture the Flag (CTF) 2013</h3>
-              </div>
-            </div>
-            
-            <div class="gallery-item aspect-square">
-              <img src="gara/ALRO.png" alt="Project">
-              <div class="gallery-caption">
-                <h3 class="font-bold">Team Sev7n working on the CloneBot</h3>
-              </div>
-            </div>
-
-
-          
-
-             <div class="gallery-item aspect-square">
-              <img src="gara/robotics.jpg" alt="Project">
-              <div class="gallery-caption">
-                <h3 class="font-bold">Third Day of Working on the CloneBot Innovation Hub </h3>
-              </div>
-            </div>
-            
-            <div class="gallery-item aspect-square">
-              <img src="gara/german.png" alt="Event">
-              <div class="gallery-caption">
-                <h3 class="font-bold">My Stroy hits the Germany Gallery Museum in Berlin </h3>
-              </div>
-            </div>
-
-
-             <div class="gallery-item aspect-square">
-              <img src="gara/3d.jpg" alt="Project">
-              <div class="gallery-caption">
-                <h3 class="font-bold">Assembling the Creality Ender 3D printer</h3>
-              </div>
-            </div>
-
-
-             <div class="gallery-item aspect-square">
-              <img src="gara/lisa.jpeg" alt="Event">
-              <div class="gallery-caption">
-                <h3 class="font-bold">Giving Back to the Germany government for Sponsoring My Bachelors under DAFI </h3>
-              </div>
-            </div>
-            
-            <div class="gallery-item aspect-square">
-              <img src="gara/power.png" alt="Presentation">
-              <div class="gallery-caption">
-                <h3 class="font-bold">At Kafue Gorge Power Station for My Research in Power Grid Distribution for urban Areas (Grade 12)</h3>
-              </div>
-
-              
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CV Section -->
-      <section id="cv" class="min-h-screen bg-white p-6 md:p-12">
-        <div class="max-w-4xl mx-auto">
-          <h1 class="text-3xl md:text-4xl font-bold mb-12 text-center section-title">
-            My <span class="text-blue-600">Curriculum Vitae</span>
-          </h1>
-          
-          <div class="grid md:grid-cols-3 gap-8 mb-12 animate-fadein">
-            <div class="col-span-2">
-              <div class="card p-6">
-                <h2 class="text-2xl font-bold mb-6 text-blue-600">Professional Experience</h2>
-                
-                <div class="space-y-6">
-                  <div class="border-l-4 border-blue-500 pl-4">
-                    <h3 class="text-xl font-semibold">Literacy Instructor</h3>
-                    <p class="text-gray-600">Caritas Czech Republic in Zambia</p>
-                    <p class="text-sm text-gray-500">August 2024 - Present</p>
-                    <p class="mt-2 text-gray-700">
-                      Teaching digital literacy skills to underserved communities with a focus on practical applications.
-                    </p>
-                  </div>
-                  
-                  <div class="border-l-4 border-blue-500 pl-4">
-                    <h3 class="text-xl font-semibold">Preceptor</h3>
-                    <p class="text-gray-600">Mansfield University</p>
-                    <p class="text-sm text-gray-500">June 2023 - April 2025</p>
-                    <p class="mt-2 text-gray-700">
-                      Mentoring students in computer science fundamentals and guiding research projects.
-                    </p>
-                  </div>
-                  
-                  <div class="border-l-4 border-blue-500 pl-4">
-                    <h3 class="text-xl font-semibold">Tech Associate</h3>
-                    <p class="text-gray-600">HeziTech</p>
-                    <p class="text-sm text-gray-500">October 2021 - April 2023</p>
-                    <p class="mt-2 text-gray-700">
-                      Developed software solutions and provided technical support for various projects.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div>
-              <div class="card p-6 mb-6">
-                <h2 class="text-2xl font-bold mb-4 text-blue-600">Education</h2>
-                
-                <div class="space-y-4">
-                  <div>
-                    <h3 class="font-semibold">BSc Computer Science</h3>
-                    <p class="text-gray-600">Cavendish University Zambia</p>
-                    <p class="text-sm text-gray-500">Expected April 2024</p>
-                  </div>
-                  
-                  <div>
-                    <h3 class="font-semibold">Cyber Virtual Assistant</h3>
-                    <p class="text-gray-600">ALX Africa & MasterCard</p>
-                    <p class="text-sm text-gray-500">Completed 2024</p>
-                  </div>
-                  
-                  <div>
-                    <h3 class="font-semibold">High School Diploma</h3>
-                    <p class="text-gray-600">Chinika Secondary School</p>
-                    <p class="text-sm text-gray-500">Graduated 2019</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="card p-6">
-                <h2 class="text-2xl font-bold mb-4 text-blue-600">Skills</h2>
-                
-                <div class="space-y-3">
-                  <div>
-                    <h3 class="font-medium">Programming</h3>
-                    <div class="flex flex-wrap gap-2 mt-1">
-                      <span class="bg-blue-100 text-blue-800 text-xs px-2.5 py-0.5 rounded">Python</span>
-                      <span class="bg-blue-100 text-blue-800 text-xs px-2.5 py-0.5 rounded">Java</span>
-                      <span class="bg-blue-100 text-blue-800 text-xs px-2.5 py-0.5 rounded">PHP</span>
-                    </div>
-                  </div>
-                  
-                 
-                  
-                  <div>
-                    <h3 class="font-medium">Data Science</h3>
-                    <div class="flex flex-wrap gap-2 mt-1">
-                      <span class="bg-purple-100 text-purple-800 text-xs px-2.5 py-0.5 rounded">Pandas</span>
-                      <span class="bg-purple-100 text-purple-800 text-xs px-2.5 py-0.5 rounded">NumPy</span>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h3 class="font-medium">Tools</h3>
-                    <div class="flex flex-wrap gap-2 mt-1">
-                      <span class="bg-yellow-100 text-yellow-800 text-xs px-2.5 py-0.5 rounded">Git</span>
-                      <span class="bg-yellow-100 text-yellow-800 text-xs px-2.5 py-0.5 rounded">GitHub</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="card p-6 animate-fadein delay-100">
-            <h2 class="text-2xl font-bold mb-6 text-blue-600">Current Projects</h2>
-            
-            <div class="bg-blue-50 rounded-lg p-6">
-              <h3 class="text-xl font-semibold mb-2">Digital Oasis for Refugees</h3>
-              <p class="text-gray-700 mb-4">
-                Developing a comprehensive digital literacy platform specifically designed for refugee communities, 
-                focusing on practical skills that enhance employability and integration.
+      <!-- HOME -->
+      <section id="home">
+        <div class="section-inner">
+          <div class="home-grid">
+            <!-- Left -->
+            <div class="fade-up">
+              <div class="home-greeting">Hello, welcome </div>
+              <h1 class="home-name">Hi, I'm <span><br>Shimiyana</span></h1>
+              <p class="home-bio">
+               A Computer Science graduate from Cavendish University Zambia, passionate about cutting-edge technology and its transformative impact on society. With a specialization in Software Development, Data Science and Artificial Intelligence, I'm driven to leverage
+                emerging technologies to build solutions for complex real-world problems.
               </p>
-              <div class="flex items-center">
-                <span class="bg-blue-600 text-white text-xs font-medium px-2.5 py-0.5 rounded mr-2">
-                  Coming Soon
-                </span>
-                <span class="text-sm text-gray-500">Launching June 28, 2024</span>
+
+              <h2 style="font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:0.9rem;color:var(--dark);">Research Interests</h2>
+              <div class="interests-grid">
+                <div class="interest-chip"><i class="fas fa-robot"></i> Artificial Intelligence</div>
+                <div class="interest-chip"><i class="fas fa-database"></i> Data Science</div>
+                <div class="interest-chip"><i class="fas fa-code"></i> Software Development</div>
+                <div class="interest-chip"><i class="fas fa-globe"></i> Digital Literacy for Refugees</div>
               </div>
 
+              <div class="btn-row">
+                <a href="https://drive.google.com/file/d/1dgHmTChBHFS26mUarFSshDTiW-zyt4Sc/view?usp=sharing" class="btn-primary" onclick="goTo('cv');return false;">View My CV</a>
+                <a href="https://calendar.app.google/pZxLGcc9ZTjpJSyv8" class="btn-outline" onclick="goTo('contact');return false;">Contact</a>
+              </div>
             </div>
-                  <br>
-             <div class="bg-blue-50 rounded-lg p-6">
-              <h3 class="text-xl font-semibold mb-2">Transforming Refugee Camps into Smart Camps</h3>
-              <p class="text-gray-700 mb-4">
-                <b>Smart Camps</b> transform refugee settlements with technology using solar energy, IoT, and digital aid systems to improve safety, healthcare, and efficiency. These innovations ensure sustainable 
-                living and empower refugees through connectivity and self-reliance.
-              </p>
-              <div class="flex items-center">
-                <span class="bg-blue-600 text-white text-xs font-medium px-2.5 py-0.5 rounded mr-2">
-                  Coming Soon
-                </span>
-                <span class="text-sm text-gray-500">Launching may 03,2026</span>
+
+            <!-- Right -->
+            <div class="home-cards fade-up delay-2">
+              <div class="proj-card">
+                <img src="Gif/ROBOTICS.gif" alt="Robotics Project">
+                <div class="proj-card-body">
+                  <h3>ClownBoat Prototype</h3>
+                  <p>Developed with Python and Java, featuring remote control functionality and programmable instruction sets
+                    for autonomous and manual navigation using VEX development tools.</p>
+                </div>
               </div>
+              <div class="proj-card" style="height:430px;">
+                <img src="gara/Show.png" alt="CTF Competition" style="height:300px;">
+                <div class="proj-card-body" style="height: 7000px;">
+                  <h3>Capture The Flag Competition</h3>
+                  <p>Co-represented Cavendish University Zambia in the CTF hosted by Digital Safe at UNICAF University (August 2023) emerging in 3rd Position.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <!-- PUBLICATIONS -->
+      <section id="publications">
+        <div class="section-inner">
+          <h1 class="section-heading fade-up">My <span>Publications</span></h1>
+          <div class="heading-bar fade-up delay-1"></div>
 
+          <div class="pub-grid">
+            <!-- Book -->
+            <div class="pub-card fade-up">
+              <div class="pub-card-header">
+                <img src="gara/book.png" alt="Brain Winners">
+                <div>
+                  <h2>Brain Winners</h2>
+                  <em>Shimiyana Jakroda &amp; Kenneth Chitambo</em>
+                  <div class="pub-meta">Published Jan 26, 2020 | ISBN: 978-9982-70-822-7</div>
+                </div>
+              </div>
+              <p class="pub-desc">This book empowers readers to develop a positive mindset for personal and professional success.
+                It offers practical strategies, inspiring stories, and tools for overcoming challenges.</p>
+              <div class="pub-footer">
+                <span class="badge badge-blue">Self-Published, Litovia</span>
+              </div>
+            </div>
+
+            <!-- DAFI -->
+            <div class="pub-card fade-up delay-1">
+              <div class="pub-card-header">
+                <img src="gara/DAFI.jpg" alt="Career Paths for Refugee Students">
+                <div>
+                  <h2>Career Paths for Refugee Students</h2>
+                  <em>DAFI Zambia Students</em>
+                  <div class="pub-meta">Magazine | 2023</div>
+                </div>
+              </div>
+              <p class="pub-desc">As DAFI President, I led the planning and organization of this event in collaboration with the executive team,
+                featuring notable speakers in migration studies and career development.</p>
+              <div class="pub-footer">
+                <span class="badge badge-green">Conference Proceedings</span>
+                <a href="https://drive.google.com/file/d/1UYihoydbYyWIo_L_a7KRVDp724Jjo6Nz/view?usp=sharing"
+                   target="_blank" class="link-arrow">View Magazine →</a>
+              </div>
+            </div>
           </div>
 
+          <div class="fade-up delay-2">
+            <h2 style="font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:1rem;">Other Publications / Projects</h2>
+            <div class="other-pubs-grid">
+              <div class="other-pub-item">
+                <h3>Digital Oasis for Refugees in Zambia</h3>
+                <p>Fostering digital inclusion and empowerment for refugees in Zambia</p>
+                <a href="https://www.researchgate.net/publication/396523029_RESEARCH_DESIGN_AND_DEVELOPMENT_OF_DIGITAL_COMMUNITY_FOR_REFUGEES_IN_ZAMBIA"
+                   target="_blank" class="link-arrow">ResearchGate →</a>
+              </div>
+              <div class="other-pub-item">
+                <h3>Titanic Classic ML</h3>
+                <p>Predicting Titanic survival with ML (first year training lab)</p>
+                <a href="https://colab.research.google.com/drive/1OHPqSo-tw01ywPW2LClMOHY2GD_KkfX-?usp=sharing"
+                   target="_blank" class="link-arrow">Google Colab →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
+      <!-- GALLERY -->
+      <section id="gallery">
+        <div class="section-inner">
+          <h1 class="section-heading fade-up">My <span>Gallery</span></h1>
+          <div class="heading-bar fade-up delay-1"></div>
 
-          
-          
-          <div class="text-center mt-12 animate-fadein delay-200">
-            <a href="https://drive.google.com/file/d/1OpALHhxl-kZrTG34dCgxg14seUZGm6DF/view?usp=sharing" target="_blank" 
-               class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition">
-              <i class="fas fa-download mr-2"></i> Download Full CV
+          <div class="gallery-grid fade-up delay-2">
+            <div class="gallery-item"><img src="gara/germany.jpeg" alt="Presentation">
+              <div class="gallery-caption">Presenting a painting titled "Raised" at the Germany Embassy</div></div>
+            <div class="gallery-item"><img src="gara/Brainv.jpg" alt="Brain Winners">
+              <div class="gallery-caption">Publication of Brain Winners at (confucius institute) the University of Zambia</div></div>
+            <div class="gallery-item"><img src="gara/frame.jpg" alt="Award">
+              <div class="gallery-caption">Hackathon Capture the Flag (CTF) 2013</div></div>
+            <div class="gallery-item"><img src="gara/ALRO.png" alt="CloneBot">
+              <div class="gallery-caption">Team Sev7n working on the CloneBot</div></div>
+            <div class="gallery-item"><img src="gara/robotics.jpg" alt="Innovation Hub">
+              <div class="gallery-caption">Third Day of Working on the CloneBot Innovation Hub</div></div>
+            <div class="gallery-item"><img src="gara/german.png" alt="Germany Gallery">
+              <div class="gallery-caption">My Story hits the Germany Gallery Museum in Berlin</div></div>
+            <div class="gallery-item"><img src="gara/assemble.jpg" alt="3D Printer">
+              <div class="gallery-caption">Assembling the Creality Ender 3D printer</div></div>
+            <div class="gallery-item"><img src="gara/lisa.jpeg" alt="DAFI">
+              <div class="gallery-caption">Giving Back to Germany government for Sponsoring My Bachelors under DAFI</div></div>
+            <div class="gallery-item"><img src="gara/power.png" alt="Power Station">
+              <div class="gallery-caption">At Kafue Gorge Power Station for Research in Power Grid Distribution (Grade 12)</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CV -->
+      <section id="cv">
+        <div class="section-inner">
+          <h1 class="section-heading fade-up">My <span>Curriculum Vitae</span></h1>
+          <div class="heading-bar fade-up delay-1"></div>
+
+          <div class="cv-grid">
+            <!-- Left: Experience -->
+            <div class="fade-up delay-1">
+              <div class="cv-card">
+                <h2>Professional Experience</h2>
+                <div class="exp-item">
+                  <h3>Information Technology Officer</h3>
+                  <div class="org">Central Legal AI</div>
+                  <div class="dates">Sept 2024 – Present</div>
+                  <p>Oversee the technical strategy and architecture of the Central Legal AI platform, ensuring front-end and back-end systems are robust, scalable, and secure.</p>
+                </div>
+                <div class="exp-item">
+                  <h3>Literacy Instructor</h3>
+                  <div class="org">Caritas Czech Republic in Zambia</div>
+                  <div class="dates">August 2024 – Present</div>
+                  <p>Teaching digital literacy skills to underserved communities with a focus on practical applications.</p>
+                </div>
+                <div class="exp-item">
+                  <h3>Project Contributor</h3>
+                  <div class="org">Smart Zambia &amp; Cavendish Innovation Hub</div>
+                  <div class="dates">Aug 2024 – Jul 2025</div>
+                  <p>Wrote and debugged control code for 2 VEX Clonebots (autonomous and remote-controlled) using Python and Java.</p>
+                </div>
+                <div class="exp-item">
+                  <h3>Preceptor</h3>
+                  <div class="org">Mansfield University</div>
+                  <div class="dates">June 2023 – April 2025</div>
+                  <p>Mentoring students in computer science fundamentals and guiding research projects.</p>
+                </div>
+                <div class="exp-item">
+                  <h3>Tech Associate</h3>
+                  <div class="org">HeziTech</div>
+                  <div class="dates">October 2021 – April 2023</div>
+                  <p>Developed software solutions and provided technical support for various projects.</p>
+                </div>
+              </div>
+
+              <!-- Current Projects -->
+              <div class="cv-card">
+                <h2>Current Projects</h2>
+                <div class="project-highlight">
+                  <h3>Digital Oasis for Refugees</h3>
+                  <p>Developing a comprehensive digital literacy platform specifically designed for refugee communities,
+                    focusing on practical skills that enhance employability and integration.</p>
+                  <div class="badge-row">
+                    <span class="badge badge-blue">Available Now</span>
+                    <span class="dates-text">Launched June 28, 2024</span>
+                  </div>
+                </div>
+                <div class="project-highlight">
+                  <h3>Transforming Refugee Camps into Smart Camps</h3>
+                  <p>Smart Camps transform refugee settlements with technology — using solar energy, IoT, and digital aid systems
+                    to improve safety, healthcare, and efficiency, empowering refugees through connectivity and self-reliance.</p>
+                  <div class="badge-row">
+                    <span class="badge badge-green">Coming Soon</span>
+                    <span class="dates-text">Launching 2028</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Education + Skills -->
+            <div class="fade-up delay-2">
+              <div class="cv-card">
+                <h2>Education</h2>
+                <div class="edu-item">
+                  <h3>BSc Computer Science</h3>
+                  <div class="org">Cavendish University Zambia</div>
+                  <div class="dates">Expected October 2024</div>
+                </div>
+                <div class="edu-item">
+                  <h3>Virtual Assistant</h3>
+                  <div class="org">ALX Africa &amp; MasterCard</div>
+                  <div class="dates">Completed 2024</div>
+                </div>
+                <div class="edu-item">
+                  <h3>High School Diploma</h3>
+                  <div class="org">Chinika Secondary School</div>
+                  <div class="dates">Graduated 2019</div>
+                </div>
+              </div>
+
+              <div class="cv-card">
+                <h2>Skills</h2>
+                <div class="skill-section">
+                  <h3>Programming</h3>
+                  <div class="skill-tags">
+                    <span class="skill-tag tag-blue">Python</span>
+                    <span class="skill-tag tag-blue">Java</span>
+                    <span class="skill-tag tag-blue">PHP</span>
+                  </div>
+                </div>
+                <div class="skill-section">
+                  <h3>Data Science</h3>
+                  <div class="skill-tags">
+                    <span class="skill-tag tag-purple">Pandas</span>
+                    <span class="skill-tag tag-purple">NumPy</span>
+                  </div>
+                </div>
+                <div class="skill-section">
+                  <h3>Tools</h3>
+                  <div class="skill-tags">
+                    <span class="skill-tag tag-yellow">Git</span>
+                    <span class="skill-tag tag-yellow">GitHub</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-download-row fade-up delay-3">
+            <a href="https://drive.google.com/file/d/1dgHmTChBHFS26mUarFSshDTiW-zyt4Sc/view?usp=sharing"
+               target="_blank" class="btn-primary">
+              <i class="fas fa-download" style="margin-right:0.5rem;"></i> Download Full CV
             </a>
           </div>
         </div>
       </section>
-      
-      <!-- Contact Section -->
-      <section id="contact" class="min-h-screen p-6 md:p-12 gradient-bg">
-        <div class="max-w-4xl mx-auto text-center">
-          <h1 class="text-3xl md:text-4xl font-bold mb-6">Let's Connect</h1>
-          <p class="text-xl text-gray-700 mb-12 max-w-2xl mx-auto">
-            I'm always interested in hearing about new opportunities, collaborations, or just chatting about technology!
-          </p>
-          
-          <div class="grid md:grid-cols-3 gap-8 mb-12 animate-fadein">
-            <div class="card p-6">
-              <i class="fas fa-envelope text-4xl text-blue-600 mb-4"></i>
-              <h3 class="text-xl font-semibold mb-2">Email</h3>
-              <a href="mailto:shimiyanajakroda@gmail.com" class="text-blue-600 hover:underline">
-                shimiyanajakroda@gmail.com
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="section-inner">
+          <div class="contact-heading fade-up">
+            <h1>Let's Connect</h1>
+            <p>I'm always interested in hearing about new opportunities, collaborations, or just chatting about technology!</p>
+          </div>
+
+          <div class="contact-cards fade-up delay-1">
+            <div class="contact-card">
+              <i class="fas fa-envelope"></i>
+              <h3>Email</h3>
+              <a href="mailto:shimiyanajakroda@gmail.com">shimiyanajakroda@gmail.com</a>
+            </div>
+            <div class="contact-card">
+              <i class="fas fa-map-marker-alt"></i>
+              <h3>Location</h3>
+              <p>Lusaka, Zambia</p>
+            </div>
+            <div class="contact-card">
+              <i class="fas fa-calendar-alt"></i>
+              <h3>Make an Appointment</h3>
+              <a>
+                <button class="btn-outline" onclick="window.open('https://calendar.app.google/pZxLGcc9ZTjpJSyv8', '_blank')">Schedule Here</button>
               </a>
             </div>
-            
-            <div class="card p-6">
-              <i class="fas fa-map-marker-alt text-4xl text-blue-600 mb-4"></i>
-              <h3 class="text-xl font-semibold mb-2">Location</h3>
-              <p class="text-gray-600">Lusaka, Zambia</p>
-            </div>
-            
-            <div class="card p-6">
-              <i class="fas fa-calendar-alt text-4xl text-blue-600 mb-4"></i>
-              <h3 class="text-xl font-semibold mb-2">Availability</h3>
-              <p class="text-gray-600">Open to opportunities</p>
-            </div>
+
           </div>
-          
-          <div class="flex justify-center space-x-6 mb-12">
-            <a href="https://github.com/ShimiyanaJakroda" target="_blank" 
-               class="social-icon text-3xl text-gray-700 hover:text-blue-600">
-              <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/shimiyana-jakroda-936636231/" target="_blank" 
-               class="social-icon text-3xl text-gray-700 hover:text-blue-600">
-              <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="https://web.facebook.com/profile.php?id=100008951825637" target="_blank" 
-               class="social-icon text-3xl text-gray-700 hover:text-blue-600">
-              <i class="fab fa-facebook"></i>
-            </a>
+
+          <div class="contact-socials fade-up delay-2">
+            <a href="https://www.researchgate.net/profile/Shimiyana-Jakroda" target="_blank"><i class="fab fa-researchgate"></i></a>
+            <a href="https://github.com/ShimiyanaJakroda" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/shimiyana-jakroda-936636231/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://web.facebook.com/profile.php?id=100008951825637" target="_blank"><i class="fab fa-facebook"></i></a>
           </div>
-          
-          <p class="text-gray-600">
-            © 2025 Shimiyana Jakroda. All rights reserved.
-          </p>
+
+          <p class="contact-copy fade-up delay-3">© 2026 Shimiyana Jakroda. All rights reserved.</p>
         </div>
       </section>
-    </div>
+
+    </main>
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const sectionIds = ['home', 'publications', 'gallery', 'cv', 'contact'];
-      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-      const sidebarContainer = document.getElementById('sidebarContainer');
-      
-      // Toggle mobile menu
-      mobileMenuBtn.addEventListener('click', function() {
-        sidebarContainer.classList.toggle('mobile-open');
-      });
-      
-      // Close mobile menu when clicking a link
-      document.querySelectorAll('.sidebar-link').forEach(link => {
-        link.addEventListener('click', function() {
-          if (window.innerWidth <= 768) {
-            sidebarContainer.classList.remove('mobile-open');
-          }
-        });
-      });
+    const sections = ['home','publications','gallery','cv','contact'];
 
-      // Smooth scroll function
-      function scrollToSection(id) {
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-          updateActiveLink(id);
-        }
-      }
+    // ── Navigation ──
+    function goTo(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setActive(id);
+      closeSidebar();
+    }
 
-      // Update active link
-      function updateActiveLink(activeId) {
-        sectionIds.forEach(id => {
-          const btn = document.getElementById('btn-' + id);
-          if (btn) {
-            btn.classList.remove('active-link');
-          }
-        });
-        const activeBtn = document.getElementById('btn-' + activeId);
-        if (activeBtn) {
-          activeBtn.classList.add('active-link');
-        }
-      }
-
-      // Intersection Observer to detect which section is in view
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            updateActiveLink(entry.target.id);
-          }
-        });
-      }, {
-        threshold: 0.3,
-        rootMargin: '0px 0px -40% 0px'
+    function setActive(id) {
+      sections.forEach(s => {
+        const btn = document.getElementById('btn-' + s);
+        if (btn) btn.classList.remove('active');
       });
+      const btn = document.getElementById('btn-' + id);
+      if (btn) btn.classList.add('active');
+    }
 
-      // Observe all sections
-      sectionIds.forEach(id => {
-        const section = document.getElementById(id);
-        if (section) {
-          observer.observe(section);
-        }
-      });
+    // ── Mobile sidebar ──
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const menuBtn = document.getElementById('mobileMenuBtn');
 
-      // Set Home as active on load
-      updateActiveLink('home');
+    function openSidebar() {
+      sidebar.classList.add('open');
+      overlay.classList.add('show');
+      menuBtn.innerHTML = '<i class="fas fa-times"></i>';
+    }
 
-      // Add click event listeners to all sidebar links
-      sectionIds.forEach(id => {
-        const btn = document.getElementById('btn-' + id);
-        if (btn) {
-          btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            scrollToSection(id);
-          });
-        }
-      });
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('show');
+      menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    }
 
-      // Only sync scrolling on desktop
-      if (window.innerWidth > 768) {
-        const mainContent = document.getElementById('scrollContainer');
-        
-        if (sidebarContainer && mainContent) {
-          let isScrolling = false;
-          
-          mainContent.addEventListener('scroll', function() {
-            if (!isScrolling) {
-              isScrolling = true;
-              sidebarContainer.scrollTop = mainContent.scrollTop;
-              setTimeout(() => { isScrolling = false; }, 100);
-            }
-          });
-          
-          sidebarContainer.addEventListener('scroll', function() {
-            if (!isScrolling) {
-              isScrolling = true;
-              mainContent.scrollTop = sidebarContainer.scrollTop;
-              setTimeout(() => { isScrolling = false; }, 100);
-            }
-          });
-        }
-      }
-      
-      // Animate elements when they come into view
-      const animateOnScroll = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fadein');
-          }
-        });
-      }, {
-        threshold: 0.1
-      });
-      
-      document.querySelectorAll('.card, .section-title, .gallery-grid').forEach(el => {
-        animateOnScroll.observe(el);
-      });
+    menuBtn.addEventListener('click', () => {
+      sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
     });
 
-    // Handle window resize
-    window.addEventListener('resize', function() {
-      if (window.innerWidth > 768) {
-        document.getElementById('sidebarContainer').classList.remove('mobile-open');
-      }
+    overlay.addEventListener('click', closeSidebar);
+
+    // ── Intersection Observer for active nav ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { threshold: 0.25 });
+
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    // ── Scroll-triggered fade-up (re-trigger) ──
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeEls.forEach(el => {
+      el.style.animationPlayState = 'paused';
+      fadeObserver.observe(el);
+    });
+
+    // ── Close sidebar on resize to desktop ──
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) closeSidebar();
     });
   </script>
 </body>
